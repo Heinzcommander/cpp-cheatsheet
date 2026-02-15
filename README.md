@@ -432,6 +432,7 @@ T d[10]; vector<T> e(d, d+10);      // e is initialized from d
 
 std::vector<std::vector<int>> mat;      // empty 2D vector
 std::vector<std::vector<int>> mat2(5);  // 5 rows, each row initially empty
+td::vector<std::vector<int>> mat(5, std::vector<int>(2, 0));  // 5 rows and 2 columns with zero
 ```
 
 ## `Range based For Loop` 
