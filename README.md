@@ -430,6 +430,18 @@ vector<int> b(a.begin(), a.end());  // b is copy of a
 vector<T> c(n, x);        // c[0]..c[n-1] init to x
 T d[10]; vector<T> e(d, d+10);      // e is initialized from d
 ```
+## `Range based for with structured binding C++17` 
+
+```cpp
+struct Data{ float x; float y; };
+auto vec = std::vector<Data>{Data{1.0F, 2.0F}, Data{4.0F, 6.0F}};
+
+for (auto &[x_, y_] : vec)
+{
+  x_ = -1.0F;
+  std::cout << x_ << " " << y_ << '\n';
+}
+```
 
 ## `deque` (Array stack queue)
 
