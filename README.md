@@ -422,7 +422,7 @@ a.pop_back();             // Decrease size by 1
 a.front();                // a[0];
 a[20]=1;                  // Crash: not bounds checked
 a.at(20)=1;               // Like a[20] but throws out_of_range()
-for (int& p : a)
+for (auto &p : a)
   p=0;                    // C++11: Set all elements of a to 0
 for (vector<int>::iterator p=a.begin(); p!=a.end(); ++p)
   *p=0;                   // C++03: Set all elements of a to 0
