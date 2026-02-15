@@ -434,16 +434,24 @@ std::vector<std::vector<int>> mat;      // empty 2D vector
 std::vector<std::vector<int>> mat2(5);  // 5 rows, each row initially empty
 ```
 
-## `Range based for with structured binding C++17` 
+## `Range based For Loop` 
 
 ```cpp
+// with structured binding C++17
 struct Data{ float x; float y; };
 auto vec = std::vector<Data>{Data{1.0F, 2.0F}, Data{4.0F, 6.0F}};
 
-for (auto &[x_, y_] : vec)
-{
+for (auto &[x_, y_] : vec) {
   x_ = -1.0F;
   std::cout << x_ << " " << y_ << '\n';
+}
+
+// 2 dimensional
+for (const auto &row : my_vector) {
+  for (const auto val : row)
+  {
+    std::cout << val << '\n';
+  }
 }
 ```
 
