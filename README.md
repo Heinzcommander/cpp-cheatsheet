@@ -449,7 +449,7 @@ for (auto &[x_, y_] : vec) {
 
 // 2 dimensional
 for (const auto &row : my_vector) {
-  for (const auto val : row)
+  for (const auto &val : row)
   {
     std::cout << val << '\n';
   }
