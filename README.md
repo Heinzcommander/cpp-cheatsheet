@@ -433,6 +433,12 @@ T d[10]; vector<T> e(d, d+10);      // e is initialized from d
 std::vector<std::vector<int>> mat;      // empty 2D vector
 std::vector<std::vector<int>> mat2(5);  // 5 rows, each row initially empty
 std::vector<std::vector<int>> mat(5, std::vector<int>(2, 0));  // 5 rows and 2 columns with zero
+
+for (size_t i = 0; i < mat.size(); i++) {       // 1. dimension = row
+  for (size_t k = 0; k < mat[i].size(); k++) {  // 2. dimension = column
+    ;
+  }
+}
 ```
 
 ## `Range based For Loop` 
