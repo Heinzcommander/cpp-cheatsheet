@@ -436,8 +436,20 @@ std::vector<std::vector<int>> mat(5, std::vector<int>(2, 0));  // 5 rows and 2 c
 
 for (size_t i = 0; i < mat.size(); i++) {       // 1. dimension = row
   for (size_t k = 0; k < mat[i].size(); k++) {  // 2. dimension = column
-    ;
+    ;  // code...
   }
+}
+```
+## `iteratoren` (similar to pointer)
+
+```cpp
+auto begin = my_vector.begin(); 
+auto end = my_vector.end();
+std::cout << *begin << '\n';
+std::cout << *end << '\n' << '\n';
+
+for (auto it = my_vector.begin(); it != my_vector.end(); ++it) {
+  std::cout << *it << '\n';
 }
 ```
 
