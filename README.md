@@ -444,7 +444,7 @@ for (size_t i = 0; i < mat.size(); i++) {       // 1. dimension = row
 
 ```cpp
 auto begin = my_vector.begin(); 
-auto end = my_vector.end();
+auto end = my_vector.end();      // bool vector_is_empty = begin == end ? true : false
 std::cout << *begin << '\n';
 std::cout << *end << '\n' << '\n';
 
