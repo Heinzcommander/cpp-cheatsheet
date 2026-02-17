@@ -301,6 +301,9 @@ template <class T, class U=T, int n=0>
 namespace N {class T {};}   // Hide name T
 N::T t;                     // Use name T in namespace N
 using namespace N;          // Make T visible without N::
+namespace {
+  constexpr uint32_t X{5}   // anonymous namespace with variable with local scope 
+}
 ```
 
 ## `memory` (dynamic memory management)
@@ -403,8 +406,12 @@ if (f2.is_open()) {
 }
 f2.close(); s.clear(); text.clear();
 
-ofstream f2("filename");    // Open file for writing
-if (f2) f2 << x;            // Write to file
+// Output in file
+std::ofstream file_out{"text_out.txt"};  // Open file for writing
+if (file_out) {
+  file_out << text;                      // Write to file
+} 
+file_out.close();
 ```
 
 ## `string` (Variable sized character array)
