@@ -385,11 +385,25 @@ ostream& operator<<(ostream& o, const T& x) {return o << ...;}
 
 ```cpp
 #include <fstream>          // Include filestream (std namespace)
-ifstream f1("filename");    // Open text file for reading
-if (f1)                     // Test if open and input available
-    f1 >> x;                // Read object from file
-f1.get(s);                  // Read char or line
-f1.getline(s, n);           // Read line into string s[n]
+std::string s{}, text{};
+    
+std::ifstream f1("text.txt");   // Open text file for reading
+if (f1) {                       // Test if open and input available
+  f1 >> s;                    // Read object from file
+}
+std::cout << s << '\n' << std::endl;    // output first line of text.txt
+f1.close();                         // close file handle
+s.clear();                          // clear string and release memory
+
+std::ifstream f2("text.txt");       // Open text file for reading
+if (f2.is_open()) {
+  while (std::getline(f2, s)) {
+    text += s + '\n';           // read while getline is true
+  }
+  std::cout << text << '\n' << std::endl; 
+}
+f2.close(); s.clear(); text.clear();
+
 ofstream f2("filename");    // Open file for writing
 if (f2) f2 << x;            // Write to file
 ```
@@ -397,6 +411,7 @@ if (f2) f2 << x;            // Write to file
 ## `string` (Variable sized character array)
 
 ```cpp
+// Memory allocation on heap - dynamic size
 #include <string>         // Include string (std namespace)
 string s1, s2="hello";    // Create strings
 s1.size(), s2.size();     // Number of characters: 0, 5
@@ -412,6 +427,7 @@ getline(cin, s);          // Read line ending in '\n'
 ## `vector` (Variable sized array/stack with built in memory allocation)
 
 ```cpp
+// Memory allocation on heap - dynamic size
 #include <vector>         // Include vector (std namespace)
 vector<int> a(10);        // a[0]..a[9] are int (default size is 0)
 vector<int> b{1,2,3};        // Create vector with values 1,2,3
