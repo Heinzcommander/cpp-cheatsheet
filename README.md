@@ -382,7 +382,6 @@ ostream& operator<<(ostream& o, const T& x) {return o << ...;}
 
 ## `fstream.h`, `fstream` (File I/O works like `cin`, `cout` as above)
 
-
 ```cpp
 #include <fstream>          // Include filestream (std namespace)
 std::string s{}, text{};
@@ -421,7 +420,17 @@ s1[0];                    // 'h'
 s1.substr(m, n);          // Substring of size n starting at s1[m]
 s1.c_str();               // Convert to const char*
 s1 = to_string(12.05);    // Converts number to string
-getline(cin, s);          // Read line ending in '\n'
+std::getline(cin, s);     // Read line ending in '\n'
+
+// Find string in text and replace it
+const std::string search_string{"Eins"};
+const std::string replace_string{"One"};
+const auto idxFind = text.find(search_string);
+if (idxFind != std::string::npos)
+  text.replace(idxFind, search_string.size(), replace_string);
+
+std::string str = "123";
+int num = std::stoi(str);
 ```
 
 ## `vector` (Variable sized array/stack with built in memory allocation)
