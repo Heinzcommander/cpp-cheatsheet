@@ -412,6 +412,21 @@ if (file_out) {
   file_out << text;                      // Write to file
 } 
 file_out.close();
+
+uint32_t append_line_to_file(const std::string &filepath, const std::string &line)
+{
+    std::ofstream file{};
+    file.open(filepath, std::ios::out | std::ios::app); // open file for output and append
+    if (file.fail())
+        return -1;
+
+    file << line;                   // append line to file
+
+    if (file.good())
+        return 1;
+
+    return 0;                       // file is local and close will called automatically
+}
 ```
 
 ## `string` (Variable sized character array)
