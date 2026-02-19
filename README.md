@@ -10,7 +10,6 @@ The goal is to give a concise overview of basic, modern C++ (C++14).
 The document is hosted on https://github.com/mortennobel/cpp-cheatsheet. Any comments and feedback are appreciated.
 
 ## Preprocessor
-
 ```cpp
                             // Comment to end of line
                             /* Multi-line comment */
@@ -27,7 +26,6 @@ The document is hosted on https://github.com/mortennobel/cpp-cheatsheet. Any com
 ```
 
 ## Literals
-
 ```cpp
 255, 0377, 0xff             // Integers (decimal, octal, hex)
 2147483647L, 0x7fffffffl    // Long (32-bit) integers
@@ -41,7 +39,6 @@ nullptr                     // Pointer type with the address of 0
 ```
 
 ## Declarations
-
 ```cpp
 int x;                      // Declare x to be an integer (value undefined)
 int x=255;                  // Declare and initialize x to 255
@@ -85,6 +82,19 @@ auto const param = config["param"];
                             // Declares it to the const result
 auto& s = singleton::instance();
                             // Declares it to a reference of the result
+```
+
+## Initialization with () or {}
+```cpp
+// { } to use when:
+int x{5};                       // value init e.g.
+struct S {int a, b;};
+S s{ .a = 1, .b = 2};           // struct value init
+std::vector<int> v{1, 2, 3};    // init-lists for array
+
+// ( ) to use when: call of std::initializer_list-Constructor should be avoid
+std::vector<int> v(1000, 42);   // fill in 1000 elements instead v{1000, 42} (just 2 Elemente)
+// or when explicit construtor call is desired
 ```
 
 ## STORAGE Classes
