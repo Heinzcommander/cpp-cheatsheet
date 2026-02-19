@@ -386,13 +386,11 @@ ostream& operator<<(ostream& o, const T& x) {return o << ...;}
 ## `fstream.h`, `fstream` (File I/O works like `cin`, `cout` as above)
 
 ```cpp
-#include <fstream>          // Include filestream (std namespace)
-std::string s{}, text{};
-    
+#include <fstream>              // Include filestream (std namespace)
+std::string s{}, text{};    
 std::ifstream f1("text.txt");   // Open text file for reading
-if (f1) {                       // Test if open and input available
-  f1 >> s;                    // Read object from file
-}
+if (f1)                         // Test if open and input available
+  f1 >> s;                      // Read object from file
 std::cout << s << '\n' << std::endl;    // output first line of text.txt
 f1.close();                         // close file handle
 s.clear();                          // clear string and release memory
@@ -408,24 +406,38 @@ f2.close(); s.clear(); text.clear();
 
 // Output in file
 std::ofstream file_out{"text_out.txt"};  // Open file for writing
-if (file_out) {
-  file_out << text;                      // Write to file
-} 
+if (file_out)   
+  file_out << text;                      // Write to file only one line
 file_out.close();
 
 uint32_t append_line_to_file(const std::string &filepath, const std::string &line)
 {
     std::ofstream file{};
-    file.open(filepath, std::ios::out | std::ios::app); // open file for output and append
+    // open file for output and append -> other options are 'binary', 'in'
+    file.open(filepath, std::ios::out | std::ios::app); 
     if (file.fail())
         return -1;
-
     file << line;                   // append line to file
-
     if (file.good())
         return 1;
-
     return 0;                       // file is local and close will called automatically
+}
+
+// Datei im Binärmodus zum Lesen öffnen
+std::ifstream file("daten.bin", std::ios::binary);
+if (!file) {
+  std::cerr << "Datei konnte nicht geöffnet werden\n";
+  return 1;
+}
+// Dateigröße ermitteln
+file.seekg(0, std::ios::end);
+std::streamsize size = file.tellg();
+file.seekg(0, std::ios::beg);
+// Puffer anlegen und gesamte Datei einlesen
+std::vector<char> buffer(size);
+if (!file.read(buffer.data(), size)) {
+  std::cerr << "Fehler beim Lesen\n";
+  return 1;
 }
 ```
 
