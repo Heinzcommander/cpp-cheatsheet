@@ -463,8 +463,22 @@ const auto idxFind = text.find(search_string);
 if (idxFind != std::string::npos)
   text.replace(idxFind, search_string.size(), replace_string);
 
+// string to int 
 std::string str = "123";
 int num = std::stoi(str);
+
+// std::string_view
+// - mainly used for efficient view on string or literal sequences without create copies of it
+// - bestehende Zeichensequenzen zu bieten, ohne Kopien zu erstellen.
+// - is used as parameter of functions, where strings are readed but not modified or should own by itself
+// - for stream output, searchs or parse or compare
+// - avoid implicite conversion of std::string, C-Strings oder Literalen
+void print(std::string_view sv) {
+    std::cout << sv << '\n';
+}
+std::string str = "Hallo Welt";
+print(str);                       // no copy of str
+    print("Literal");             // works directly without construct string type
 ```
 
 ## `vector` (Variable sized array/stack with built in memory allocation)
