@@ -453,9 +453,8 @@ if (!file.read(buffer.data(), size)) {
 ```
 
 ## `string` (Variable sized character array)
-
-```cpp
 // Memory allocation on heap - dynamic size
+```cpp
 #include <string>         // Include string (std namespace)
 string s1, s2="hello";    // Create strings
 s1.size(), s2.size();     // Number of characters: 0, 5
@@ -493,9 +492,8 @@ print(str);                       // no copy of str
 ```
 
 ## `vector` (Variable sized array/stack with built in memory allocation)
-
-```cpp
 // Memory allocation on heap - dynamic size
+```cpp
 #include <vector>         // Include vector (std namespace)
 vector<int> a(10);        // a[0]..a[9] are int (default size is 0)
 vector<int> b{1,2,3};        // Create vector with values 1,2,3
