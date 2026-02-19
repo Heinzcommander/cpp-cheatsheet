@@ -314,6 +314,7 @@ using namespace N;          // Make T visible without N::
 namespace {
   constexpr uint32_t X{5}   // anonymous namespace with variable with local scope 
 }
+namespase fs = std::filesystem;  // use namespace filesystem with alias fs
 ```
 
 ## `memory` (dynamic memory management)
