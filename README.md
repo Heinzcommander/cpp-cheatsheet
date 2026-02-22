@@ -388,6 +388,11 @@ if (cin)                    // Good state (not EOF)?
                             // To read/write any type T:
 istream& operator>>(istream& i, T& x) {i >> ...; x=...; return i;}
 ostream& operator<<(ostream& o, const T& x) {return o << ...;}
+
+void printByteAsBinary(std::uint8_t in) 
+{
+std::cout << static_cast<int>(in) << " as binary: " << std::bitset<8>(in) << std::endl;
+}
 ```
 
 ## `fstream.h`, `fstream` (File I/O works like `cin`, `cout` as above)
