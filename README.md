@@ -318,7 +318,6 @@ namespase fs = std::filesystem;  // use namespace filesystem with alias fs
 ```
 
 ## `memory` (dynamic memory management)
-
 ```cpp
 #include <memory>           // Include memory (std namespace)
 shared_ptr<int> x;          // Empty shared_ptr to a integer on heap. Uses reference counting for cleaning up objects.
@@ -357,7 +356,6 @@ r = dynamic_pointer_cast<B>(t); // Converts t to a shared_ptr<B>
 ```
 
 ## `math.h`, `cmath` (floating point math)
-
 ```cpp
 #include <cmath>            // Include cmath (std namespace)
 sin(x); cos(x); tan(x);     // Trig functions, x (double) is in radians
@@ -371,7 +369,6 @@ fabs(x); fmod(x, y);        // Absolute value, x mod y
 ```
 
 ## `assert.h`, `cassert` (Debugging Aid)
-
 ```cpp
 #include <cassert>        // Include iostream (std namespace)
 assert(e);                // If e is false, print message and abort
@@ -379,7 +376,6 @@ assert(e);                // If e is false, print message and abort
 ```
 
 ## `iostream.h`, `iostream` (Replaces `stdio.h`)
-
 ```cpp
 #include <iostream>         // Include iostream (std namespace)
 cin >> x >> y;              // Read words x and y (any type) from stdin
@@ -395,7 +391,6 @@ ostream& operator<<(ostream& o, const T& x) {return o << ...;}
 ```
 
 ## `fstream.h`, `fstream` (File I/O works like `cin`, `cout` as above)
-
 ```cpp
 #include <fstream>              // Include filestream (std namespace)
 std::string s{}, text{};    
@@ -449,6 +444,29 @@ std::vector<char> buffer(size);
 if (!file.read(buffer.data(), size)) {
   std::cerr << "Fehler beim Lesen\n";
   return 1;
+}
+```
+## C++17: std:.filesystem
+```cpp
+#include <filesystem>         
+const fs::path workspace_path = "C:/Users/Jan/OneDrive/_Coding/UdemyCpp";
+fs::path chapter_path;
+chapter_path = workspace_path;
+chapter_path /= "06_String";             // --> 'C:/Users/Jan/OneDrive/_Coding/UdemyCpp/06_String'
+
+auto current_file_path = fs::current_path();    
+std::cout << "relative_path: " << current_file_path.relative_path() << '\n';
+std::cout << "parent_path: " << current_file_path.parent_path() << '\n';
+std::cout << "filename: " << current_file_path.filename() << '\n';
+std::cout << "stem: " << current_file_path.stem() << '\n';
+std::cout << "extension: " << current_file_path.extension() << '\n';
+std::cout << "exists: " << fs::exists(current_file_path) << '\n';
+
+for (auto it = fs::directory_iterator(current_path);
+         it != fs::directory_iterator{};
+         ++it)
+{
+  std::cout << *it << std::endl;      // output 
 }
 ```
 
