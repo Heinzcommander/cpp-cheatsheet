@@ -707,6 +707,12 @@ thread t2(pingPongFn, "pong");
 thread t3(pingPongFn, "boing");
 ```
 
+## `NLohman json` (GitHub Library for json)
+```cpp
+https://github.com/nlohmann/json/blob/develop/README.md
+
+```
+
 ## `future` (thread support library)
 ```cpp
 #include <future>         // Include future
