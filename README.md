@@ -528,20 +528,36 @@ a.pop_back();             // Decrease size by 1
 a.front();                // a[0];
 a[20]=1;                  // Crash: not bounds checked
 a.at(20)=1;               // Like a[20] but throws out_of_range()
-for (auto &p : a)
-  p=0;                    // C++11: Set all elements of a to 0
-for (vector<int>::iterator p=a.begin(); p!=a.end(); ++p)
-  *p=0;                   // C++03: Set all elements of a to 0
+
 vector<int> b(a.begin(), a.end());  // b is copy of a
 vector<T> c(n, x);        // c[0]..c[n-1] init to x
 T d[10]; vector<T> e(d, d+10);      // e is initialized from d
 
-std::vector<std::vector<int>> mat;      // empty 2D vector
-std::vector<std::vector<int>> mat2(5);  // 5 rows, each row initially empty
-std::vector<std::vector<int>> mat(5, std::vector<int>(2, 0));  // 5 rows and 2 columns with zero
+// loops
+for (auto &p : a)
+  p=0;                    // C++11: Set all elements of a to 0
+for (vector<int>::iterator p=a.begin(); p!=a.end(); ++p)
+  *p=0;                   // C++03: Set all elements of a to 0
 
-for (size_t i = 0; i < mat.size(); i++) {       // 1. dimension = row
-  for (size_t k = 0; k < mat[i].size(); k++) {  // 2. dimension = column
+std::vector<std::vector<int>> mat;                              // empty 2D vector
+std::vector<std::vector<int>> mat(5);                           // 5 rows, each row initially empty
+std::vector<std::vector<int>> mat(5, std::vector<int>(2, 0));   // 5 rows and 2 columns with zero
+
+// classic iteration
+for (size_t i = 0; i < mat.size(); ++i) {                       // 1. dimension = row
+  for (size_t k = 0; k < mat[i].size(); ++k) {                  // 2. dimension = column
+    ;  // code...
+  }
+}
+// or iteration with iteratoren
+for (auto itr_row = mat.begin(); itr_row != mat.end(); ++itr_row) {                      // 1. dimension = row
+  for (auto itr_col = mat[itr_row].begin(); itr_col != mat[itr_row].end(); ++itr_col) {  // 2. dimension = column
+    ;  // code...
+  }
+}
+// or range based for loop
+for (auto &row : mat) {                      // 1. dimension = row
+  for (auto &col : row) {                    // 2. dimension = column
     ;  // code...
   }
 }
