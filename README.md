@@ -296,8 +296,8 @@ template <class T, class U=T, int n=0>
 ```
 
 ## Namespaces
-
 ```cpp
+namespace { ... }           // anonymous namespace with local scope - instead static keyword before variables
 namespace N {class T {};}   // Hide name T
 N::T t;                     // Use name T in namespace N
 using namespace N;          // Make T visible without N::
