@@ -306,7 +306,6 @@ template <class T, class U=T, int n=0>
 ```
 
 ## Namespaces
-
 ```cpp
 namespace N {class T {};}   // Hide name T
 N::T t;                     // Use name T in namespace N
@@ -548,7 +547,6 @@ for (size_t i = 0; i < mat.size(); i++) {       // 1. dimension = row
 }
 ```
 ## `iteratoren` (similar to pointer)
-
 ```cpp
 auto begin = my_vector.begin(); 
 auto end = my_vector.end();     // bool vector_is_empty = begin == end ? true : false
@@ -561,8 +559,8 @@ for (auto it = my_vector.begin(); it != my_vector.end(); ++it) {
 }
 ```
 
-## `Range based For Loop` 
-
+## `Range based for loop` 
+- works in background with iteratoren
 ```cpp
 // with structured binding C++17
 struct Data{ float x; float y; };
