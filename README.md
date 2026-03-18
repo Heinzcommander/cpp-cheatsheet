@@ -515,7 +515,9 @@ print(str);                       // no copy of str
 ```
 
 ## `vector` (Variable sized array/stack with built in memory allocation)
-// Memory allocation on heap - dynamic size
+- Memory allocation on heap - dynamic size (std::array has fix size, so that the memory is on the stack)
+- all elements are side-by-side in the memory
+- a push_back or pop of elements can trigger a new memory allocation, which consume many time
 ```cpp
 #include <vector>         // Include vector (std namespace)
 vector<int> a(10);        // a[0]..a[9] are int (default size is 0)
