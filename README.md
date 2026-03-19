@@ -15,14 +15,27 @@ The document is hosted on https://github.com/mortennobel/cpp-cheatsheet. Any com
                             /* Multi-line comment */
 #include  <stdio.h>         // Insert standard header file
 #include "myfile.h"         // Insert file in current directory
+
 #define X some text         // Replace X with some text
 #define F(a,b) a+b          // Replace F(1,2) with 1+2
 #define X \
  some text                  // Multiline definition
+// - don't use #define directives for macros or type aliases, because the debugging of runtime code is worst
+// - Modern C++ recommend using for getting similar advantages
+
 #undef X                    // Remove definition
 #if defined(X)              // Conditional compilation (#ifdef X)
 #else                       // Optional (#ifndef X or #if !defined(X))
 #endif                      // Required after #if, #ifdef
+```
+
+## Aliases
+```cpp
+#define int_vec std::vector<int>        // Old-style macro
+using int_vec = std::vector<int>;       // Modern C++
+
+#define BUFFER_SIZE 1024                // old
+constexpr std::size_t BufferSize = 1024;// Modern
 ```
 
 ## Literals
