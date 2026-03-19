@@ -112,6 +112,8 @@ std::vector<int> v{1, 2, 3};    // init-lists for 1D array
 // ( ) to use when: call of std::initializer_list-Constructor should be avoid
 std::vector<int> v1(5, 1);     // 5 Elemente, alle 1
 std::vector<int> v2{5, 1};     // 2 Elemente: {5, 1}
+std::vector<std::vector<uint32_t>> 
+    my_matrix(5, std::vector<uint32_t>(4));  // 2D array with 5 rows and 4 columns
 
 // comparable
 std::map<std::string, uint32_t> my_map1{};   // empty map
