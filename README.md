@@ -111,7 +111,6 @@ std::vector<int> v(1000, 42);   // fill in 1000 elements instead v{1000, 42} (ju
 ```
 
 ## STORAGE Classes
-
 ```cpp
 int x;                      // Auto (memory exists only while in scope)
 static int x;               // Global lifetime even if local scope
@@ -119,7 +118,6 @@ extern int x;               // Information only, declared elsewhere
 ```
 
 ## Statements
-
 ```cpp
 x=y;                        // Every expression is a statement
 int x;                      // Declarations are statements
@@ -154,7 +152,6 @@ catch (...) { c; }          // If a throws something else, jump here
 ```
 
 ## Functions
-
 ```cpp
 int f(int x, int y);        // f is a function taking 2 ints and returning int
 void f();                   // f is a procedure taking no arguments
@@ -171,7 +168,6 @@ extern "C" {void f();}      // f() was compiled in C
 Function parameters and return values may be of any type. A function must either be declared or defined before
 it is used. It may be declared first and defined later. Every program consists of a set of a set of global variable
 declarations and a set of function definitions (possibly in separate files), one of which must be:
-
 ```cpp
 int main()  { statements... }     // or
 int main(int argc, char* argv[]) { statements... }
@@ -184,7 +180,6 @@ Functions with different parameters may have the same name (overloading). Operat
 Precedence order is not affected. New operators may not be created.
 
 ## Expressions
-
 Operators are grouped by precedence, highest first. Unary operators and assignment evaluate right to left. All
 others are left to right. Precedence does not affect order of evaluation, which is undefined. There are no run time
 checks for arrays out of bounds, invalid pointers, etc.
@@ -252,7 +247,6 @@ x , y                       // evaluates x and y, returns y (seldom used)
 ```
 
 ## Classes
-
 ```cpp
 class T {                   // A new type
 private:                    // Section accessible only to T's member functions
@@ -306,7 +300,6 @@ constructor (required to create arrays) if the class has no constructors. Constr
 destructors do not inherit.
 
 ## Templates
-
 ```cpp
 template <class T> T f(T t);// Overload f for all types
 template <class T> class X {// Class with type parameter T
@@ -316,6 +309,23 @@ template <class T> X<T>::X(T t) {}
 X<int> x(3);                // An object of type "X of int"
 template <class T, class U=T, int n=0>
                             // Template with default parameters
+```
+## Structured bindings C++17 for unpack tuples, structs, array or pairs into named variables
+```cpp
+Point p{3, 4};
+auto [px, py] = p;  // Unpacks struct public members
+std::cout << "x: " << px << ", y: " << py << std::endl;  // Outputs: x: 3, y: 4
+
+auto myTuple = std::make_tuple(1, "hello", 3.14);
+auto [a, b, c] = myTuple;
+std::cout << a << " " << b << " " << c << std::endl;  // Outputs: 1 hello 3.14
+
+std::map<std::string, int> scores = {{"Alice", 95}, {"Bob", 87}};
+for (auto& [name, score] : scores) {
+  std::cout << name << ": " << score << std::endl;
+}
+
+
 ```
 
 ## Namespaces
