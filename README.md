@@ -98,16 +98,24 @@ auto& s = singleton::instance();
 ```
 
 ## Initialization with () or {}
+Recommend is in general the using of { }, only if the call of a specific constructor is desired
+then is ( ) to use (e.g. std::vector)
 ```cpp
-// { } to use when:
-int x{5};                       // value init e.g.
+// { } to use for varibale initialisation
+int a{};                        // 0-init (value-initialization)
+int b{5};                       // list-initialization
+
 struct S {int a, b;};
 S s{ .a = 1, .b = 2};           // struct value init
-std::vector<int> v{1, 2, 3};    // init-lists for array
+std::vector<int> v{1, 2, 3};    // init-lists for 1D array
 
 // ( ) to use when: call of std::initializer_list-Constructor should be avoid
-std::vector<int> v(1000, 42);   // fill in 1000 elements instead v{1000, 42} (just 2 Elemente)
-// or when explicit construtor call is desired
+std::vector<int> v1(5, 1);     // 5 Elemente, alle 1
+std::vector<int> v2{5, 1};     // 2 Elemente: {5, 1}
+
+// comparable
+std::map<std::string, uint32_t> my_map1{};   // empty map
+std::map<std::string, uint32_t> my_map2();   // most vaxing parse error - function declaration instead of map object
 ```
 
 ## STORAGE Classes
