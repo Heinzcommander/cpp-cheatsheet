@@ -671,7 +671,6 @@ a.size();                 // 1
 ```
 
 ## `set` (store unique elements - usually implemented as binary search trees - avg. time complexity: O(log n))
-
 ```cpp
 #include <set>            // Include set (std namespace)
 set<int> s;               // Set of integers
@@ -679,6 +678,20 @@ s.insert(123);            // Add element to set
 if (s.find(123) != s.end()) // Search for an element
     s.erase(123);
 cout << s.size();         // Number of elements in set
+
+std::set<std::string> namen = {"Hans", "Anna", "Peter", "Anna"};
+for (const std::string& name : namen) {
+  std::cout << name << " ";
+}
+std::cout << "\n";        // Ausgabe: Anna Hans Peter
+
+std::set<int> s = {1, 2, 3};
+if (s.find(2) != s.end()) {
+  std::cout << "2 ist im Set enthalten.\n";
+}
+if (s.find(4) == s.end()) {
+  std::cout << "4 ist nicht im Set.\n";
+}
 ```
 
 ## `unordered_set` (store unique elements - usually implemented as a hash set - avg. time complexity: O(1))
