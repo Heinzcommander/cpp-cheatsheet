@@ -630,9 +630,7 @@ for (const auto &row : my_vector) {
 ```
 
 ## `deque` (Array stack queue)
-
 `deque<T>` is like `vector<T>`, but also supports:
-
 ```cpp
 #include <deque>          // Include deque (std namespace)
 a.push_front(x);          // Puts x at a[0], shifts elements toward back
@@ -649,7 +647,6 @@ a.second;                 // 3
 ```
 
 ## `map` (associative array - usually implemented as binary search trees - avg. time complexity: O(log n))
-
 ```cpp
 #include <map>            // Include map (std namespace)
 map<string, int> a;       // Map from string to int
@@ -660,7 +657,6 @@ a.size();                 // 1
 ```
 
 ## `unordered_map` (associative array - usually implemented as hash table - avg. time complexity: O(1))
-
 ```cpp
 #include <unordered_map>  // Include map (std namespace)
 unordered_map<string, int> a; // Map from string to int
@@ -683,7 +679,7 @@ std::set<std::string> namen = {"Hans", "Anna", "Peter", "Anna"};
 for (const std::string& name : namen) {
   std::cout << name << " ";
 }
-std::cout << "\n";        // Ausgabe: Anna Hans Peter
+std::cout << "\n";        // Ausgabe: Anna Hans Peter | the double of ANNA will automatically deleted
 
 std::set<int> s = {1, 2, 3};
 if (s.find(2) != s.end()) {
