@@ -667,6 +667,7 @@ a.size();                 // 1
 ```
 
 ## `set` (store unique elements - usually implemented as binary search trees - avg. time complexity: O(log n))
+- set hold the entries automatically sorted in ascending ordered
 ```cpp
 #include <set>            // Include set (std namespace)
 set<int> s;               // Set of integers
