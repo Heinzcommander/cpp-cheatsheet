@@ -36,6 +36,8 @@ using int_vec = std::vector<int>;       // Modern C++
 
 #define BUFFER_SIZE 1024                // old
 constexpr std::size_t BufferSize = 1024;// Modern
+
+using Friends = std::map<std::string, std::pair<std::int32_t, std::int32_t>>
 ```
 
 ## Literals
