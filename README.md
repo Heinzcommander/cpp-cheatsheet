@@ -495,7 +495,7 @@ if (!file.read(buffer.data(), size)) {
   return 1;
 }
 ```
-## C++17: std:.filesystem
+## C++17: std::filesystem
 ```cpp
 #include <filesystem>         
 const fs::path workspace_path = "C:/Users/Jan/OneDrive/_Coding/UdemyCpp";
@@ -519,7 +519,7 @@ for (auto it = fs::directory_iterator(current_path);
 }
 ```
 
-## `string` (Variable sized character array)
+## `std::string` (Variable sized character array)
 // Memory allocation on heap - dynamic size
 ```cpp
 #include <string>         // Include string (std namespace)
@@ -558,7 +558,7 @@ print(str);                       // no copy of str
     print("Literal");             // works directly without construct string type
 ```
 
-## `vector` (Variable sized array/stack with built in memory allocation)
+## `std::vector` (Variable sized array/stack with built in memory allocation)
 - Memory allocation on heap - dynamic size (std::array has fix size, so that the memory is on the stack)
 - all elements are side-by-side in the memory
 - a push_back or pop of elements can trigger a new memory allocation, which consume many time
@@ -625,6 +625,9 @@ std::cout << "Neues Alter: " << std::get<1>(person) << std::endl;
 ```
 
 ## `iteratoren` (similar to pointer)
+- forward_iterator: iterate from begin to end
+- bidirectional_iterator: iteration in both directions
+- random_access_iterator: allow directly access to an index
 ```cpp
 auto begin = my_vector.begin(); 
 auto end = my_vector.end();     // bool vector_is_empty = begin == end ? true : false
@@ -635,6 +638,19 @@ std::cout << *end << '\n' << '\n';
 for (auto it = my_vector.begin(); it != my_vector.end(); ++it) {
   std::cout << *it << '\n';
 }
+
+std::vector<uint32_t> my_vec{1, 2, 3, 4, 5};
+// forward iterator
+for (auto it = my_vec.begin(); it != my_vec.end(); ++it) { 
+  *it += 1; // change my_vec entries with dereferncing
+}
+print_vec(my_vec);      // output: 2,3,4,5,6
+
+// bidirectional iterator
+for (auto it = my_vec.rbegin(); it != my_vec.rend(); ++it) { 
+  *it -= 1; // change my_vec entries with dereferncing
+}
+print_vec(my_vec);      // output: 1,2,3,4,5
 ```
 
 ## `Range based for loop` 
