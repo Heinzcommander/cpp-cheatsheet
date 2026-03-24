@@ -682,8 +682,7 @@ a.push_front(x);          // Puts x at a[0], shifts elements toward back
 a.pop_front();            // Removes a[0], shifts toward front
 ```
 
-## `utility` (pair)
-
+## `std::pair' #include <utility>
 ```cpp
 #include <utility>        // Include utility (std namespace)
 pair<string, int> a("hello", 3);  // A 2-element struct
@@ -691,7 +690,7 @@ a.first;                  // "hello"
 a.second;                 // 3
 ```
 
-## `map` (associative array - usually implemented as binary search trees - avg. time complexity: O(log n))
+## `std::map` (associative array - usually implemented as binary search trees - avg. time complexity: O(log n))
 ```cpp
 #include <map>            // Include map (std namespace)
 map<string, int> a;       // Map from string to int
@@ -711,8 +710,8 @@ for (auto& p:a)
 a.size();                 // 1
 ```
 
-## `set` (store unique elements - usually implemented as binary search trees - avg. time complexity: O(log n))
-- set hold the entries automatically sorted in ascending ordered
+## `std::set` (store unique elements - usually implemented as binary search trees - avg. time complexity: O(log n))
+- std::set hold unique (no duplicated) entries automatically sorted in ascending ordered
 ```cpp
 #include <set>            // Include set (std namespace)
 set<int> s;               // Set of integers
