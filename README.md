@@ -497,6 +497,7 @@ if (!file.read(buffer.data(), size)) {
   return 1;
 }
 ```
+
 ## C++17: std::filesystem
 ```cpp
 #include <filesystem>         
@@ -687,9 +688,15 @@ a.pop_front();            // Removes a[0], shifts toward front
 ## `std::pair'
 ```cpp
 #include <utility>        // Include utility (std namespace)
-pair<string, int> a("hello", 3);  // A 2-element struct
+std::pair<string, int> a{"hello", 3};  // A 2-element struct
 a.first;                  // "hello"
 a.second;                 // 3
+
+using Friends = std::map<std::string, std::pair<std::int32_t, std::int32_t>>;
+Friends my_map2{};
+my_map2["Tobias"] = std::make_pair(43, 83);
+my_map2["Juliane"] = std::make_pair(40, 57);
+my_map2["Kurt"] = std::make_pair(5, 22);
 ```
 
 ## `std::map` 
