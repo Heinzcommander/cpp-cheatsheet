@@ -607,6 +607,23 @@ for (auto &row : mat) {                      // 1. dimension = row
   }
 }
 ```
+## `std::tuple` (container for store fix number of elements with different data types)
+```cpp
+// 1. Definition eines Tupels: Name (string), Alter (int), Gehalt (double)
+std::tuple<std::string, int, double> person = std::make_tuple("Alice", 30, 55000.5);
+
+// 2. Zugriff auf die Elemente mit std::get<Index>(tuple_name)
+// Die Indizes sind 0-basiert.
+std::string name = std::get<0>(person);
+int alter = std::get<1>(person);
+double gehalt = std::get<2>(person);
+std::cout << name << " ist " << alter << " Jahre alt." << std::endl;
+
+// 3. Werte ändern
+std::get<1>(person) = 31; 
+std::cout << "Neues Alter: " << std::get<1>(person) << std::endl;
+```
+
 ## `iteratoren` (similar to pointer)
 ```cpp
 auto begin = my_vector.begin(); 
