@@ -311,6 +311,18 @@ destructors do not inherit.
 
 ## Templates
 ```cpp
+template <typename T>
+void print_vector(std::vector<T> &vec)
+{
+    for (const auto &row : vec) { std::cout << row << "\n"; }
+} 
+
+template <typename T, std::size_t N>
+void print_array(std::array<T, N> &arr)
+{
+    for (const auto &row : arr) { std::cout << row << "\n"; }
+} 
+
 template <class T> T f(T t);// Overload f for all types
 template <class T> class X {// Class with type parameter T
   X(T t); };                // A constructor
