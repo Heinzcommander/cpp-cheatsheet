@@ -684,7 +684,7 @@ a.push_front(x);          // Puts x at a[0], shifts elements toward back
 a.pop_front();            // Removes a[0], shifts toward front
 ```
 
-## `std::pair' #include <utility>
+## `std::pair'
 ```cpp
 #include <utility>        // Include utility (std namespace)
 pair<string, int> a("hello", 3);  // A 2-element struct
@@ -692,7 +692,8 @@ a.first;                  // "hello"
 a.second;                 // 3
 ```
 
-## `std::map` (associative array - usually implemented as binary search trees - avg. time complexity: O(log n))
+## `std::map` 
+- associative array - usually implemented as binary search trees - avg. time complexity: O(log n)
 ```cpp
 #include <map>            // Include map (std namespace)
 map<string, int> a;       // Map from string to int
@@ -700,6 +701,25 @@ a["hello"] = 3;           // Add or replace element a["hello"]
 for (auto& p:a)
     cout << p.first << p.second;  // Prints hello, 3
 a.size();                 // 1
+
+using FriendsParams = std::pair<std::int32_t, std::int32_t>;
+using Friends = std::map<std::string, FriendsParams>;
+
+// Default contructor
+Friends my_map1{};
+my_map1["Tobias"] = FriendsParams{43, 83};
+my_map1["Juliane"] = FriendsParams{40, 57};
+my_map1["Kurt"] = FriendsParams{5, 22};
+
+// Initializer list contructor
+Friends my_map3{{"Tobias", {43, 83}}, {"Juliane", {40, 57}}};
+
+// Output
+for(const auto &row : my_map1) {
+  std::cout   << "Name = " << row.first 
+              << " | Alter = " << row.second.first
+              << " | Gewicht = " << row.second.second << std::endl;
+}
 ```
 
 ## `unordered_map` (associative array - usually implemented as hash table - avg. time complexity: O(1))
