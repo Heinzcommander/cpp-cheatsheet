@@ -765,7 +765,6 @@ if (s.find(4) == s.end()) {
 ```
 
 ## `unordered_set` (store unique elements - usually implemented as a hash set - avg. time complexity: O(1))
-
 ```cpp
 #include <unordered_set>  // Include set (std namespace)
 unordered_set<int> s;     // Set of integers
@@ -774,9 +773,22 @@ if (s.find(123) != s.end()) // Search for an element
     s.erase(123);
 cout << s.size();         // Number of elements in set
 ```
+## `random` 
+```cpp
+#include <random>
+
+std::vector<int32_t> my_vec(NUM_ELEMENTS, 0U);
+// random numbers
+std::mt19937 random_generator{42};
+// distribution
+std::uniform_int_distribution<std::int32_t> distribution{-10, 10};
+// init vector with random numbers within distribution
+for (auto &row : my_vec) {
+  row = distribution(random_generator);
+}
+```
 
 ## `algorithm` (A collection of 60 algorithms on sequences with iterators)
-
 ```cpp
 #include <algorithm>      // Include algorithm (std namespace)
 min(x, y); max(x, y);     // Smaller/larger of x, y (any type defining <)
