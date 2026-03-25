@@ -325,6 +325,15 @@ void print_array(std::array<T, N> &arr)
     for (const auto &row : arr) { std::cout << row << "\n"; }
 } 
 
+template <typename T>
+void print_min_max()
+{
+    std::cout << "min =" << std::numeric_limits<T>::min() << "\n";
+    std::cout << "max =" << std::numeric_limits<T>::max() << "\n";
+}
+// --> call
+print_min_max<uint32_t>();
+
 template <class T> T f(T t);// Overload f for all types
 template <class T> class X {// Class with type parameter T
   X(T t); };                // A constructor
