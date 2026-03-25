@@ -806,11 +806,38 @@ sort(a, a+n);             // Sort array a[0]..a[n-1] by <
 sort(a.begin(), a.end()); // Sort vector or deque
 reverse(a.begin(), a.end()); // Reverse vector or deque
 ```
+## `limits` 
+```cpp
+#include <limits>      // Include 
+
+template <typename T>
+void print_type_properties()
+{
+  std::cout << "min=" << std::numeric_limits<T>::min() << '\n'
+            << "max=" << std::numeric_limits<T>::max() << '\n'
+            << "bits=" << std::numeric_limits<T>::digits << '\n'
+            << "decdigits=" << std::numeric_limits<T>::digits10 << '\n'
+            << "integral=" << std::boolalpha
+            << std::numeric_limits<T>::is_integer << '\n'
+            << "signed=" << std::boolalpha
+            << std::numeric_limits<T>::is_signed << '\n'
+            << "exact=" << std::boolalpha << std::numeric_limits<T>::is_exact << '\n'
+            << "infinity=" << std::boolalpha
+            << std::numeric_limits<T>::has_infinity << '\n';
+}
+// --> call
+print_type_properties<std::uint16_t>();
+
+template <typename T>
+bool almost_equal(const T x, const T y)
+{
+    return std::abs(x - y) <= std::numeric_limits<T>::epsilon();
+}
+```
 
 ## `chrono` (Time related library)
 ```cpp
 #include <chrono>                // Include chrono
-
 //steady_clock is suitable for interfall measurment
 const auto start_time = std::chrono::steady_clock::now();   // static member function will called by the class name
 for (int i = 0; i < 10'000'000; ++i) { fhelper *= i; }
