@@ -800,16 +800,20 @@ reverse(a.begin(), a.end()); // Reverse vector or deque
 
 ## `chrono` (Time related library)
 ```cpp
-#include <chrono>         // Include chrono
-using namespace std::chrono; // Use namespace
-auto from =               // Get current time_point
+#include <chrono>                // Include chrono
+using namespace std::chrono;     // Use namespace
+
+//steady_clock is suitable for interfall measurment
+
+// high_resolution_clock may be an alias for stead_clock or system_clock
+auto from =                      // Get current time_point
   high_resolution_clock::now();
 // ... do some work       
-auto to =                 // Get current time_point
+auto to =                        // Get current time_point
   high_resolution_clock::now();
-using ms =                // Define ms as floating point duration
+using ms =                       // Define ms as floating point duration
   duration<float, milliseconds::period>;
-                          // Compute duration in milliseconds
+                                 // Compute duration in milliseconds
 cout << duration_cast<ms>(to - from)
   .count() << "ms";
 ```
