@@ -801,11 +801,17 @@ reverse(a.begin(), a.end()); // Reverse vector or deque
 ## `chrono` (Time related library)
 ```cpp
 #include <chrono>                // Include chrono
-using namespace std::chrono;     // Use namespace
 
 //steady_clock is suitable for interfall measurment
+const auto start_time = std::chrono::steady_clock::now();   // static member function will called by the class name
+for (int i = 0; i < 10'000'000; ++i) { fhelper *= i; }
+const auto end_time = std::chrono::steady_clock::now();     // static member function will called by the class name
+const auto elapsed_time 
+       = std::chrono::duration_cast<std::chrono::milliseconds>(end_time-start_time);   // resolution ms
+std::cout << "Time " << elapsed_time.count() << std::endl;  // output in ms
 
 // high_resolution_clock may be an alias for stead_clock or system_clock
+using namespace std::chrono;     // Use namespace
 auto from =                      // Get current time_point
   high_resolution_clock::now();
 // ... do some work       
