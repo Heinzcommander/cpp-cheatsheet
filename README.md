@@ -389,6 +389,24 @@ std::transform( vec.begin(),
                 vec.end(), 
                 vecResult.begin(), 
                 lambda);  // Lambda function for transform task
+
+// erase of elements within vector
+vec.erase(  std::remove_if( vec.begin(), 
+                            vec.end(), 
+                            [](const auto val){return (val > 5);}),
+            vec.end());
+// - std::remove_if: removes all elements from the input range [Itrfirst, Itrlast) that 
+//   satisfy the criteria of the unäre function (lambda) to a new range at the end
+// - it is return a iterator to the new range that is followed by all values that haven't
+//   satisfy the function expression
+
+// erase elements within string with std::remove_if and lambda function
+std::string str2 = "Jumped\n Over\tA\vLazy \t  Fox\r\n";
+str2.erase( std::remove_if(str2.begin(), 
+                           str2.end(),
+                           [](unsigned char x) { return std::isspace(x); }),
+            str2.end());
+--> str2 is now "JumpedOverALazyFox"
 ```
 
 ## `memory` (dynamic memory management)
