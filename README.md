@@ -100,8 +100,8 @@ auto& s = singleton::instance();
 ```
 
 ## Initialization with () or {}
-Recommend is in general the using of { }, only if the call of a specific constructor is desired
-then is ( ) to use (e.g. std::vector)
+- Recommend is in general the using of { }
+- only if the call of a specific constructor is desired then is ( ) to use (e.g. std::vector)
 ```cpp
 // { } to use for varibale initialisation
 int a{};                        // 0-init (value-initialization)
@@ -343,7 +343,8 @@ X<int> x(3);                // An object of type "X of int"
 template <class T, class U=T, int n=0>
                             // Template with default parameters
 ```
-## Structured bindings C++17 for unpack tuples, structs, array or pairs into named variables
+## Structured bindings (C++17) 
+- for unpack tuples, structs, array or pairs into named variables
 ```cpp
 Point p{3, 4};
 auto [px, py] = p;  // Unpacks struct public members
@@ -370,6 +371,11 @@ namespace {
   constexpr uint32_t X{5}   // anonymous namespace with variable with local scope 
 }
 namespase fs = std::filesystem;  // use namespace filesystem with alias fs
+```
+
+## `Lambda` 
+```cpp
+
 ```
 
 ## `memory` (dynamic memory management)
@@ -507,7 +513,7 @@ if (!file.read(buffer.data(), size)) {
 }
 ```
 
-## C++17: std::filesystem
+## std::filesystem (C++17)
 ```cpp
 #include <filesystem>         
 const fs::path workspace_path = "C:/Users/Jan/OneDrive/_Coding/UdemyCpp";
@@ -532,7 +538,7 @@ for (auto it = fs::directory_iterator(current_path);
 ```
 
 ## `std::string` (Variable sized character array)
-// Memory allocation on heap - dynamic size
+- Memory allocation on heap - dynamic size
 ```cpp
 #include <string>         // Include string (std namespace)
 string s1, s2="hello";    // Create strings
@@ -619,6 +625,7 @@ for (auto &row : mat) {                      // 1. dimension = row
   }
 }
 ```
+
 ## `std::tuple` (container for store fix number of elements with different data types)
 ```cpp
 // 1. Definition eines Tupels: Name (string), Alter (int), Gehalt (double)
@@ -738,7 +745,8 @@ for(const auto &row : my_map1) {
 }
 ```
 
-## `unordered_map` (associative array - usually implemented as hash table - avg. time complexity: O(1))
+## `unordered_map` 
+- associative array - usually implemented as hash table - avg. time complexity: O(1))
 ```cpp
 #include <unordered_map>  // Include map (std namespace)
 unordered_map<string, int> a; // Map from string to int
@@ -748,8 +756,9 @@ for (auto& p:a)
 a.size();                 // 1
 ```
 
-## `std::set` (store unique elements - usually implemented as binary search trees - avg. time complexity: O(log n))
+## `std::set` 
 - std::set hold unique (no duplicated) entries automatically sorted in ascending ordered
+- store unique elements - usually implemented as binary search trees - avg. time complexity: O(log n)
 ```cpp
 #include <set>            // Include set (std namespace)
 set<int> s;               // Set of integers
@@ -773,7 +782,8 @@ if (s.find(4) == s.end()) {
 }
 ```
 
-## `unordered_set` (store unique elements - usually implemented as a hash set - avg. time complexity: O(1))
+## `unordered_set` 
+- store unique elements - usually implemented as a hash set - avg. time complexity: O(1)
 ```cpp
 #include <unordered_set>  // Include set (std namespace)
 unordered_set<int> s;     // Set of integers
