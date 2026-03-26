@@ -382,6 +382,13 @@ std::transform( vec.begin(),
                 vecResult.begin(),
                 // Lambda function for transform task - check even
                 [](const int val){return (val % 2) ? true : false; });
+
+// or
+auto lambda = [](const int val){return (val % 2) ? true : false; };
+std::transform( vec.begin(), 
+                vec.end(), 
+                vecResult.begin(), 
+                lambda);  // Lambda function for transform task
 ```
 
 ## `memory` (dynamic memory management)
