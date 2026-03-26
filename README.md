@@ -407,6 +407,18 @@ str2.erase( std::remove_if(str2.begin(),
                            [](unsigned char x) { return std::isspace(x); }),
             str2.end());
 --> str2 is now "JumpedOverALazyFox"
+
+// lambda in code
+auto lambda_NoEven = [](std::vector<int> vec)
+{
+  for (const auto &val : vec)
+  {
+    if (val % 2 == 0)
+      return false;
+  }
+    return true;
+};
+bool has_no_even = lambda_NoEven(my_vector2);
 ```
 
 ## `memory` (dynamic memory management)
