@@ -423,22 +423,27 @@ bool has_no_even = lambda_NoEven(my_vector2);
 
 ## Ranges (C++20)
 ```cpp
-// traditional code with iteratoren
 std::vector<int> input = {0, 1, 2, 3, 4, 5};
 std::vector<int> output;
+
+// Workimg with container and the algorithm library traditional with iteratoren
 std::copy_if(input.begin(), input.end(), std::back_inserter(output), 
              [](int n){ return n % 2 == 0; });
 
-// more modern code with ranges and pipe operator |
+// Workimg with container and the algorithm library more modern with ranges and pipe operator |
 auto even_squares = input 
   | std::views::filter([](int n){ return n % 2 == 0; })
   | std::views::transform([](int n){ return n * n; });
+
+std::vector<int> vecEvenSquares(even_squares.begine(), even_squares.end());  // even_squars range_view to std::vector<int>
+
 /*
 even_squares is a C++20 Range-View, that is filtering from the input only the even numbers
 and then square it. The working is from the left to the right and the ouput is always ofer
 give to the pipe |. 
 */
 ```
+
 ## `memory` (dynamic memory management)
 ```cpp
 #include <memory>           // Include memory (std namespace)
