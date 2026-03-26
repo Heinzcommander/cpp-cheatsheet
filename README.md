@@ -358,8 +358,6 @@ std::map<std::string, int> scores = {{"Alice", 95}, {"Bob", 87}};
 for (auto& [name, score] : scores) {
   std::cout << name << ": " << score << std::endl;
 }
-
-
 ```
 
 ## Namespaces
@@ -374,8 +372,16 @@ namespase fs = std::filesystem;  // use namespace filesystem with alias fs
 ```
 
 ## `Lambda` 
+- anonymous functions that can be used locally
 ```cpp
-
+//transform
+// applies the given function to the elements of the given input range(s), 
+// and stores the result in an output range starting from 
+std::transform( vec.begin(), 
+                vec.end(), 
+                vecResult.begin(),
+                // Lambda function for transform task - check even
+                [](const int val){return (val % 2) ? true : false; });
 ```
 
 ## `memory` (dynamic memory management)
