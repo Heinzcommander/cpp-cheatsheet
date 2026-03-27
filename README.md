@@ -260,50 +260,63 @@ x , y                       // evaluates x and y, returns y (seldom used)
 
 ## Classes
 ```cpp
-class T {                   // A new type
-private:                    // Section accessible only to T's member functions
-protected:                  // Also accessible to classes derived from T
-public:                     // Accessible to all
-    int x;                  // Member data
-    void f();               // Member function
-    void g() {return;}      // Inline member function
-    void h() const;         // Does not modify any data members
-    int operator+(int y);   // t+y means t.operator+(y)
-    int operator-();        // -t means t.operator-()
-    T(): x(1) {}            // Constructor with initialization list
-    T(const T& t): x(t.x) {}// Copy constructor
-    T& operator=(const T& t)
-    {x=t.x; return *this; } // Assignment operator
-    ~T();                   // Destructor (automatic cleanup routine)
-    explicit T(int a);      // Allow t=T(3) but not t=3
-    T(float x): T((int)x) {}// Delegate constructor to T(int)
-    operator int() const
-    {return x;}             // Allows int(t)
-    friend void i();        // Global function i() has private access
-    friend class U;         // Members of class U have private access
-    static int y;           // Data shared by all T objects
-    static void l();        // Shared code.  May access y but not x
-    class Z {};             // Nested class T::Z
-    typedef int V;          // T::V means int
-};
-void T::f() {               // Code for member function f of class T
-    this->x = x;}           // this is address of self (means x=x;)
-int T::y = 2;               // Initialization of static member (required)
-T::l();                     // Call to static member
-T t;                        // Create object t implicit call constructor
-t.f();                      // Call method f on object t
+class T {                       // A new type
+  private:                      // Section accessible only to T's member functions
+    int x;                      // Member data
+  protected:                    // Also accessible to classes derived from T
+  public:                       // Accessible to all
+    T(): x(1) {}                // Constructor with initialization list
+    explicit T(int a);          // Allow t=T(3) but not t=3
+    ~T();                       // Destructor (automatic cleanup routine)
 
-struct T {                  // Equivalent to: class T { public:
-  virtual void i();         // May be overridden at run time by derived class
-  virtual void g()=0; };    // Must be overridden (pure virtual)
-class U: public T {         // Derived class U inherits all members of base T
+    T(float x) : T((int)x) {}   // Delegate constructor to T(int)
+    T(const T& t): x(t.x) {}    // Copy constructor
+
+    T& operator=(const T& t)    // Assignment operator
+      {x=t.x; return *this; }
+
+    operator int() const        // operator int() enables conversion of a class object to int type
+      {return x;}               // Allows conversion of this class type to int-type int(t)
+    int operator+(int y)        // t+y means t.operator+(y)
+      { return x + y;};       
+    int operator-()             // -t means t.operator-() 
+      { return x * (-1)};           
+
+    void f();                   // Member function
+    void g() {return;}          // Inline member function
+    void h() const;             // Does not modify any data members
+
+    friend void i();            // Global function i() has private access
+    friend class U;             // Members of class U have private access
+
+    static int y;               // Data shared by all T objects
+    static void l();            // Shared code.  May access y but not x
+
+    class Z {};                 // Nested class T::Z
+    typedef int V;              // T::V means int
+};
+
+void T::f() {                 // Code for member function f of class T
+    this->x = x;}             // this is address of self (means x=x;)
+int T::y = 2;                 // Initialization of static member (required)
+T::l();                       // Call to static member
+
+T t;                          // Create object t implicit call constructor
+t.f();                        // Call method f on object t
+
+struct T {                    // Equivalent to: class T { public:
+  virtual void i();           // May be overridden at run time by derived class
+  virtual void g()=0; };      // Must be overridden (pure virtual)
+
+class U: public T {           // Derived class U inherits all members of base T
   public:
-  void g(int) override; };  // Override method g
-class V: private T {};      // Inherited members of T become private
+  void g(int) override; };    // Override method g
+
+class V: private T {};        // Inherited members of T become private
 class W: public T, public U {};
-                            // Multiple inheritance
+                              // Multiple inheritance
 class X: public virtual T {};
-                            // Classes derived from X have base T directly
+                              // Classes derived from X have base T directly
 ```
 
 All classes have a default copy constructor, assignment operator, and destructor, which perform the
