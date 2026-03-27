@@ -372,7 +372,7 @@ namespace {
 namespase fs = std::filesystem;  // use namespace filesystem with alias fs
 ```
 
-## `Lambda` 
+## Lambda 
 - anonymous functions that can be used locally
 ```cpp
 //transform
@@ -580,7 +580,7 @@ if (!file.read(buffer.data(), size)) {
 }
 ```
 
-## std::filesystem (C++17)
+## `std::filesystem` (C++17)
 ```cpp
 #include <filesystem>         
 const fs::path workspace_path = "C:/Users/Jan/OneDrive/_Coding/UdemyCpp";
@@ -719,7 +719,7 @@ std::get<1>(person) = 31;
 std::cout << "Neues Alter: " << std::get<1>(person) << std::endl;
 ```
 
-## `iteratoren` (similar to pointer)
+## Iteratoren (similar to pointer)
 - forward_iterator: iterate from begin to end
 - bidirectional_iterator: iteration in both directions
 - random_access_iterator: allow directly access to an index
@@ -748,7 +748,7 @@ for (auto it = my_vec.rbegin(); it != my_vec.rend(); ++it) {
 print_vec(my_vec);      // output: 1,2,3,4,5
 ```
 
-## `Range based for loop` 
+## Range based for loop
 - works in background with iteratoren
 ```cpp
 // with structured binding C++17
@@ -892,6 +892,7 @@ sort(a, a+n);             // Sort array a[0]..a[n-1] by <
 sort(a.begin(), a.end()); // Sort vector or deque
 reverse(a.begin(), a.end()); // Reverse vector or deque
 ```
+
 ## `limits` 
 ```cpp
 #include <limits>      // Include 
