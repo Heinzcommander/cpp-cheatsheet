@@ -343,6 +343,7 @@ X<int> x(3);                // An object of type "X of int"
 template <class T, class U=T, int n=0>
                             // Template with default parameters
 ```
+
 ## Structured bindings (C++17) 
 - for unpack tuples, structs, array or pairs into named variables
 ```cpp
@@ -662,12 +663,7 @@ vector<int> b(a.begin(), a.end());  // b is copy of a
 vector<T> c(n, x);        // c[0]..c[n-1] init to x
 T d[10]; vector<T> e(d, d+10);      // e is initialized from d
 
-// loops
-for (auto &p : a)
-  p=0;                    // C++11: Set all elements of a to 0
-for (vector<int>::iterator p=a.begin(); p!=a.end(); ++p)
-  *p=0;                   // C++03: Set all elements of a to 0
-
+// Iterations | loops
 std::vector<std::vector<int>> mat;                              // empty 2D vector
 std::vector<std::vector<int>> mat(5);                           // 5 rows, each row initially empty
 std::vector<std::vector<int>> mat(5, std::vector<int>(2, 0));   // 5 rows and 2 columns with zero
@@ -681,7 +677,7 @@ for (size_t i = 0; i < mat.size(); ++i) {                       // 1. dimension 
 // or iteration with iteratoren
 for (auto itr_row = mat.begin(); itr_row != mat.end(); ++itr_row) {                      // 1. dimension = row
   for (auto itr_col = mat[itr_row].begin(); itr_col != mat[itr_row].end(); ++itr_col) {  // 2. dimension = column
-    ;  // code...
+    *itr_col = 0;      // iterator is a pointer
   }
 }
 // or range based for loop
@@ -690,6 +686,20 @@ for (auto &row : mat) {                      // 1. dimension = row
     ;  // code...
   }
 }
+
+// std::erase | on containers (C++20)
+std::vector<int> v{1, 2, 3, 2, 4, 2, 5};
+auto removed = std::erase(v, 2);           // alle 2en aus dem Vektor entfernen
+
+std::string s = "a_b_c_d_e";
+auto removed = std::erase(s, '_');         // alle Unterstriche entfernen
+
+std::vector<std::string> names{"Alice", "Bob", "Alice", "Eve"};
+auto removed = std::erase(names, std::string{"Alice"}); // alle "Alice" entfernen
+
+std::vector<int> v{1,2,3,4,5,6,7,8,9,10};
+auto removed = std::erase_if(v, [](int x) {
+                              return x % 2 == 0; });    // Bedingung: gerade Zahl
 ```
 
 ## `std::tuple` (container for store fix number of elements with different data types)
