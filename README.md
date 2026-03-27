@@ -261,9 +261,6 @@ x , y                       // evaluates x and y, returns y (seldom used)
 ## Classes
 ```cpp
 class T {                       // A new type
-  private:                      // Section accessible only to T's member functions
-    int x;                      // Member data
-  protected:                    // Also accessible to classes derived from T
   public:                       // Accessible to all
     T(): x(1) {}                // Constructor with initialization list
     explicit T(int a);          // Allow t=T(3) but not t=3
@@ -294,6 +291,10 @@ class T {                       // A new type
 
     class Z {};                 // Nested class T::Z
     typedef int V;              // T::V means int
+
+  private:                      // Section accessible only to T's member functions
+    int x;                      // Member data
+  protected:                    // Also accessible to classes derived from T
 };
 
 void T::f() {                 // Code for member function f of class T
