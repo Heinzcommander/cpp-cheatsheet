@@ -261,10 +261,12 @@ x , y                       // evaluates x and y, returns y (seldom used)
 ## Classes
 ```cpp
 class T {                       // A new type
-  public:                       // Accessible to all
+  public:                       // Accessible to all   
     T(): x(1) {}                // Constructor with initialization list
     explicit T(int a);          // Allow t=T(3) but not t=3
-    ~T();                       // Destructor (automatic cleanup routine)
+    virtual ~T();               // Destructor (automatic cleanup routine) make it always virtual,
+                                // for more flexible and secure code in connection with inheritance
+                                // and 'new' operator of these objects 
 
     T(float x) : T((int)x) {}   // Delegate constructor to T(int)
     T(const T& t): x(t.x) {}    // Copy constructor
@@ -321,7 +323,10 @@ class X: public virtual T {};
 
 /*- Intro polymorphism ---------------------------*/
 class Base {
-  public: void print_data_no_virtual()
+  public: // is at least one methode in the parent class virtual, so it is necessary to define the destructor as virtual
+          // that warrant the proper calling of destructor at the using with inheritance and memory managements functions like 'new'
+          virtual ~Base(){};                           
+          void print_data_no_virtual()
                   { std::cout << "Base" << std::endl };
           virtual void print_data_virtual()             // may be overridden at run time by derived
                   { std::cout << "Base" << std::endl };
@@ -351,6 +356,17 @@ Base    // methode of Base class is called
 Base    // methode of Base class is called, because the vector is used the type of 'Base *'
 Base    // pointer to Base is used
 Derived // pointer of Derived is using the internal methode
+
+ T() = default;              // compiler use default implementation of constructor
+
+/*- important keywords ---------------------------*/
+class UniqueFile {
+public:
+  UniqueFile() = default;        // compiler use default implementation of constructor
+
+  UniqueFile(const UniqueFile&) = delete;             // copy forbidden 
+  UniqueFile& operator=(const UniqueFile&) = delete;  // copy forbidden
+};
 ```
 
 All classes have a default copy constructor, assignment operator, and destructor, which perform the
