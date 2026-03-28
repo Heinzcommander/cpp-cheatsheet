@@ -357,12 +357,11 @@ Base    // methode of Base class is called, because the vector is used the type 
 Base    // pointer to Base is used
 Derived // pointer of Derived is using the internal methode
 
- T() = default;              // compiler use default implementation of constructor
-
 /*- important keywords ---------------------------*/
 class UniqueFile {
 public:
   UniqueFile() = default;        // compiler use default implementation of constructor
+  virtual ~UniqueFile() = default;
 
   UniqueFile(const UniqueFile&) = delete;             // copy forbidden 
   UniqueFile& operator=(const UniqueFile&) = delete;  // copy forbidden
