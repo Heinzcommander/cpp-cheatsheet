@@ -720,6 +720,21 @@ int height = 480;  // Bildhöhe
 int width = 640;   // Bildbreite
 std::vector<std::vector<uint8_t>> image(height, std::vector<uint8_t>(width * 4, 0));  // RGBA: 4 Bytes pro Pixel
 image[row][col * channels + channel] = ... ;         // access to pixel -> channels=4 for RGBA:
+
+// resize 2D vector
+m_Matrix.resize(height);
+for(auto &row : m_Matrix) { row.resize(width); }
+
+if (height > m_height) {
+  auto itrRow = m_Matrix.begin();
+  itrRow += m_height;
+  for (; itrRow != m_Matrix.end(); ++itrRow)
+  {
+    for(auto itrCol = itrRow->begin(); itrCol != itrRow->end(); ++itrCol ){
+      *itrCol = 0;               
+    }             
+  }
+}
 ```
 
 ## `std::tuple` (container for store fix number of elements with different data types)
