@@ -310,6 +310,8 @@ t.f();                        // Call method f on object t
 struct T {                    // Equivalent to: class T { public:
   virtual void i();           // May be overridden at run time by derived class
   virtual void g()=0; };      // Must be overridden (pure virtual)
+                              // --> Abstract class has at least one pure virtual method
+                              // --> Abstract class can't be instantiate, they can only be derived
 
 class U: public T {           // Derived class U inherits all members of base T
   public:
@@ -366,6 +368,55 @@ public:
   UniqueFile(const UniqueFile&) = delete;             // copy forbidden 
   UniqueFile& operator=(const UniqueFile&) = delete;  // copy forbidden
 };
+
+class MyClass {
+public:
+    // 1. User‑declared default ctor, but use compiler’s default implementation
+    MyClass() = default;
+
+    // 2. Explicitly ask compiler to generate default destructor
+    ~MyClass() = default;
+
+    // 3. delete copy constructor
+    MyClass(const MyClass&) = delete;
+
+    // 4. delete copy assignment
+    MyClass& operator=(const MyClass&) = delete;
+};
+
+class Base {
+public:
+    virtual void f1() { /* ... */ }
+    virtual void f2() final { /* ... */ }          // cannot be overridden
+};
+
+class Derived : public Base {
+public:
+    void f1() override { /* ... */ }              // OK: overrides Base::f1
+    // void f2() override { ... }                 // Error: f2 is final
+
+    // Non‑copyable by default
+    Derived(const Derived&) = delete;
+    Derived& operator=(const Derived&) = delete;
+
+    Derived() = default;                          // default ctor
+    ~Derived() override = default;                // virtual dtor, default body
+};
+
+/*
+Default-Konstruktor:
+Derived() = default; erzeugt den Standardkonstruktor automatisch durch den Compiler. Dieser initialisiert die
+Basisklasse und alle Mitglieder mit ihren Default-Werten – ohne benutzerdefinierten Code.
+
+Virtueller Destruktor:
+~Derived() override = default; überschreibt den virtuellen Destruktor der Basisklasse explizit und lässt den
+Compiler die Standardimplementierung generieren. Das override stellt sicher, dass die Basisklasse tatsächlich
+einen virtuellen Destruktor hat, und verhindert Fehler bei fehlender Virtualität.
+
+Warum diese Kombination?
+Bei Polymorphie (Zeiger/Referenzen auf Basisklasse) wird so korrekte Zerstörung der Derived-Objekte garantiert,
+ohne manuellen Code. Der Compiler kümmert sich um die korrekte Reihenfolge: Derived-Mitglieder → Derived-Basis → Base-Destruktor
+*/
 ```
 
 All classes have a default copy constructor, assignment operator, and destructor, which perform the
