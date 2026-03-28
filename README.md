@@ -338,6 +338,7 @@ class Derived : public Base {
 Base oBase{};
 Derived oDerived1{}:
 
+// polymorphism is only working on pointer types
 const std::vector< Base * > vecClasses{&oBase, &oDerived1};
 
 for(const auto row : vecClasses) {
