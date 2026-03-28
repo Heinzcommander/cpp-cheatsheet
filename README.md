@@ -714,6 +714,12 @@ auto removed = std::erase(names, std::string{"Alice"}); // alle "Alice" entferne
 std::vector<int> v{1,2,3,4,5,6,7,8,9,10};
 auto removed = std::erase_if(v, [](int x) {
                               return x % 2 == 0; });    // Bedingung: gerade Zahl
+
+// using of std:vector to store 2D Images
+int height = 480;  // Bildhöhe
+int width = 640;   // Bildbreite
+std::vector<std::vector<uint8_t>> image(height, std::vector<uint8_t>(width * 4, 0));  // RGBA: 4 Bytes pro Pixel
+image[row][col * channels + channel] = ... ;         // access to pixel -> channels=4 for RGBA:
 ```
 
 ## `std::tuple` (container for store fix number of elements with different data types)
