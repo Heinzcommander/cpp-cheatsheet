@@ -318,6 +318,38 @@ class W: public T, public U {};
                               // Multiple inheritance
 class X: public virtual T {};
                               // Classes derived from X have base T directly
+
+/*- Intro polymorphism ---------------------------*/
+class Base {
+  public: void print_data_no_virtual()
+                  { std::cout << "Base" << std::endl };
+          virtual void print_data_virtual()             // may be overridden at run time by derived
+                  { std::cout << "Base" << std::endl };
+};
+
+class Derived : public Base {
+  public: void print_Data_no_virtual()
+                  { std::cout << "Derived" << std::endl };
+          void print_data_virtual() override             // overridden methode of Base
+                  { std::cout << "Derived" << std::endl };
+};
+
+/*- calling ---------------------------*/
+Base oBase{};
+Derived oDerived1{}:
+
+const std::vector< Base * > vecClasses{&oBase, &oDerived1};
+
+for(const auto row : vecClasses) {
+  row->print_Data_no_virtual();
+  row->print_Data_virtual();
+}
+
+/*- output ---------------------------*/
+Base    // methode of Base class is called
+Base    // methode of Base class is called, because the vector is used the type of 'Base *'
+Base    // pointer to Base is used
+Derived // pointer of Derived is using the internal methode
 ```
 
 All classes have a default copy constructor, assignment operator, and destructor, which perform the
