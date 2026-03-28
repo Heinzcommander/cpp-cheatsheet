@@ -289,7 +289,7 @@ class T {                       // A new type
     friend class U;             // Members of class U have private access
 
     static int y;               // Data shared by all T objects
-    static void l();            // Shared code.  May access y but not x
+    static int l();            // Shared code.  May access y but not x
 
     class Z {};                 // Nested class T::Z
     typedef int V;              // T::V means int
@@ -302,7 +302,9 @@ class T {                       // A new type
 void T::f() {                 // Code for member function f of class T
     this->x = x;}             // this is address of self (means x=x;)
 int T::y = 2;                 // Initialization of static member (required)
-T::l();                       // Call to static member
+
+int T::l() { ...; }           // Implement static methode outside of class declaration
+auto k = T::l();              // Call to static member
 
 T t;                          // Create object t implicit call constructor
 t.f();                        // Call method f on object t
