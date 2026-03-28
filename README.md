@@ -289,7 +289,7 @@ class T {                       // A new type
     friend class U;             // Members of class U have private access
 
     static int y;               // Data shared by all T objects
-    static int l();            // Shared code.  May access y but not x
+    static int l();            // Shared code.  May access y but not x. No access to instance members.
 
     class Z {};                 // Nested class T::Z
     typedef int V;              // T::V means int
