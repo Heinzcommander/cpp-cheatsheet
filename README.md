@@ -418,6 +418,16 @@ einen virtuellen Destruktor hat, und verhindert Fehler bei fehlender Virtualitä
 Warum diese Kombination?
 Bei Polymorphie (Zeiger/Referenzen auf Basisklasse) wird so korrekte Zerstörung der Derived-Objekte garantiert,
 ohne manuellen Code. Der Compiler kümmert sich um die korrekte Reihenfolge: Derived-Mitglieder → Derived-Basis → Base-Destruktor
+
+Warum virtual nötig sein kann:
+Wenn deine Klasse als Basisklasse dient und Polymorphie (z. B. Löschen über Basisklassen-Zeiger) geplant ist, musst du den
+Destruktor explizit als virtual ~Base() = default; deklarieren. Ohne virtual wird bei delete basePtr; (wo basePtr auf ein
+Derived-Objekt zeigt) nur der Basisklassen-Destruktor aufgerufen – Derived-Teile bleiben unzerstört, was zu Memory Leaks oder
+Undefined Behavior führt
+
+virtual ~Base() = default; mit virtual ist perfekt okay und empfohlen – es signalisiert "trivialer Destruktor, aber polymorph".
+Bei Klassen ohne Vererbung oder wenn du nie über Basisptr löschst, ist non-virtual fine (spart minimal Overhead). Aber bei jeder
+potenziell polymorphen Base: immer virtual ~() = default;
 */
 ```
 
