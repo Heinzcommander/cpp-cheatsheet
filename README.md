@@ -534,7 +534,7 @@ str2.erase( std::remove_if(str2.begin(),
             str2.end());
 --> str2 is now "JumpedOverALazyFox"
 
-// lambda in code
+// lambda as local function
 auto lambda_NoEven = [](std::vector<int> vec)
 {
   for (const auto &val : vec)
@@ -545,6 +545,27 @@ auto lambda_NoEven = [](std::vector<int> vec)
     return true;
 };
 bool has_no_even = lambda_NoEven(my_vector2);
+
+/*- Lambda with extern variable access --------------------*/
+// the capture clausel enable lambda expression the access to external variables
+// in general the lambda expression has no access to variables outside the function
+// the acces is explicity to define
+
+int x = 10;
+auto by_value  = [x]() { x = 20; };      // x in lambda is only a copy
+auto by_ref    = [&x]() { x = 20; };     // x in lambda is a refernce to the real object
+
+int a = 1, b = 2;
+auto lamb1 = [=]() { std::cout << a + b; };   // a,b by value
+auto lamb2 = [&]() { a = 3; b = 4; };         // a,b by refernce
+
+int a = 10, b = 20, c = 30;
+
+auto lambda = [&, a]() {                 // b,c by reference, a by value
+    b = 100;
+    c = 200;
+    // a ist nur eine Kopie
+};
 ```
 
 ## Ranges (C++20)
