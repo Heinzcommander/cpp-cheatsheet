@@ -299,6 +299,7 @@ class T {                       // A new type
   protected:                    // Also accessible to classes derived from T
 };
 
+/*- code area     ---------------------------*/
 void T::f() {                 // Code for member function f of class T
     this->x = x;}             // this is address of self (means x=x;)
 int T::y = 2;                 // Initialization of static member (required)
@@ -315,6 +316,7 @@ struct T {                    // Equivalent to: class T { public:
                               // --> Abstract class has at least one pure virtual method
                               // --> Abstract class can't be instantiate, they can only be derived
 
+/*- Inheritance  ----------------------------------------*/
 class U: public T {           // Derived class U inherits all members of base T
   public:
   void g(int) override; };    // Override method g
@@ -324,6 +326,21 @@ class W: public T, public U {};
                               // Multiple inheritance
 class X: public virtual T {};
                               // Classes derived from X have base T directly
+
+/*- Reference as return value ---------------------------*/
+class Beispiel {
+    int wert;
+public:
+    int& getWert() { return wert; }           // Non-const: modizierbar
+    const int& getWertConst() const { return wert; }  // Const: nur lesbar [web:10]
+    
+    Beispiel& setWert(int w) {                // Chainable Setter
+        wert = w;
+        return *this;
+    }
+};
+
+// Verwenden Sie const& für reine Getter, um versehentliche Modifikationen zu verhindern
 
 /*- Intro polymorphism ---------------------------*/
 class Base {
