@@ -901,6 +901,35 @@ std::cout << name << " ist " << alter << " Jahre alt." << std::endl;
 // 3. Werte ändern
 std::get<1>(person) = 31; 
 std::cout << "Neues Alter: " << std::get<1>(person) << std::endl;
+
+// Definition and insert elements 
+std::map<OTCID, std::tuple< std::unique_ptr<TcWMc::CAxis>,
+                            STcWMcAxisCommand,
+                            STcWMcAxisMotionDatas,
+                            STcWMcAxisMotionDatas,
+                            TcW::SStatusEx>> m_mapAxis{};
+
+m_mapAxis.emplace(
+    someId,
+    std::make_tuple(
+        std::make_unique<TcWMc::CAxis>(/* args */),
+        STcWMcAxisCommand{},        // init an instance of struct/class and set all members to default 
+        STcWMcAxisMotionDatas{},    // init an instance of struct/class and set all members to default
+        STcWMcAxisMotionDatas{},    // init an instance of struct/class and set all members to default
+        TcW::SStatusEx{}            // init an instance of struct/class and set all members to default
+    )
+);
+
+// Access
+for (auto& [id, tuple] : m_mapAxs) {
+  auto& [xisPtr, command, motion1, motion2, status] = tuple;
+}
+// or
+auto& tuple = m_mapAxis[axisId];
+auto& axisPtr = std::get<0>(entry);
+auto& command = std::get<1>(entry);
+// or
+auto& [axisPtr, command, motion1, motion2, status] = m_mapAxis.at(axisId);
 ```
 
 ## Iteratoren (similar to pointer)
