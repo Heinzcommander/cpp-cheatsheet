@@ -926,8 +926,8 @@ for (auto& [id, tuple] : m_mapAxs) {
 }
 // or
 auto& tuple = m_mapAxis[axisId];
-auto& axisPtr = std::get<0>(entry);
-auto& command = std::get<1>(entry);
+auto& axisPtr = std::get<0>(tuple);
+auto& command = std::get<1>(tuple);
 // or
 auto& [axisPtr, command, motion1, motion2, status] = m_mapAxis.at(axisId);
 ```
