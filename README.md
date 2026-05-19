@@ -276,10 +276,18 @@ class T {                       // A new type
 
     operator int() const        // operator int() enables conversion of a class object to int type
       {return x;}               // Allows conversion of this class type to int-type int(t)
-    int operator+(int y)        // t+y means t.operator+(y)
+
+    int operator+(int y)            // t+y means t.operator+(y)
       { return x + y;};       
-    int operator-()             // -t means t.operator-() 
+    int operator-()                 // -t means t.operator-() 
       { return x * (-1)};           
+
+    T operator+(const T &rhs) const  // new = this + other -> lhs = this + rhs
+      { return this.x += rhs.x };
+
+    T operator+=(const T &rhs)   // new = this + other -> lhs = this + rhs
+      {   this.x += rhs.x;
+          return *this };
 
     void f();                   // Member function
     void g() {return;}          // Inline member function
