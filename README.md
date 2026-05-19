@@ -259,6 +259,12 @@ x , y                       // evaluates x and y, returns y (seldom used)
 ```
 
 ## Classes
+Rule Of Five: Destructor, 
+              Copy constructor, 
+              Copy assignment operator, 
+              Move constructor, 
+              Move assignment operator
+=> only neccessary if new or delete used in own class
 ```cpp
 class T {                       // A new type
   public:                       // Accessible to all   
