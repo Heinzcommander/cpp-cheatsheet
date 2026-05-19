@@ -467,6 +467,7 @@ constructor (required to create arrays) if the class has no constructors. Constr
 destructors do not inherit.
 
 ## Templates
+declaration and definition only in header!
 ```cpp
 template <typename T>
 void print_vector(std::vector<T> &vec)
