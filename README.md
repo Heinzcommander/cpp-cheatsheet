@@ -378,6 +378,18 @@ Base    // methode of Base class is called, because the vector is used the type 
 Base    // pointer to Base is used
 Derived // pointer of Derived is using the internal methode
 
+/*- working with const ---------------------------*/
+Class CMatrix
+{
+public:
+    CMatrix() = delete;
+    CMatrix(const double &A, const double &B);
+    ~CMatrix() = default;
+}
+
+=> calling
+const CMatrix oMatrix2{1.0, 2.0, 3.0, 4.0};    // make sure that instance of class is also const
+
 /*- important keywords ---------------------------*/
 class UniqueFile {
 public:
