@@ -389,6 +389,7 @@ public:
 
 => calling
 const CMatrix oMatrix2{1.0, 2.0, 3.0, 4.0};    // make sure that instance of class is also const
+const auto oMatrix3 = CMatrix{1.0, 2.0, 3.0, 4.0};
 
 /*- important keywords ---------------------------*/
 class UniqueFile {
