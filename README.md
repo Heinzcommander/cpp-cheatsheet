@@ -285,9 +285,10 @@ class T {                       // A new type
     T operator+(const T &rhs) const  // new = this + other -> lhs = this + rhs
       { return this.x += rhs.x };
 
-    T operator+=(const T &rhs)   // new = this + other -> lhs = this + rhs
+    T& operator+=(const T &rhs)   // new = this + other -> lhs = this + rhs
       {   this.x += rhs.x;
-          return *this };
+          return *this
+      };
 
     void f();                   // Member function
     void g() {return;}          // Inline member function
