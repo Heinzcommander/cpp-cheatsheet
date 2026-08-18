@@ -510,6 +510,59 @@ Wann brauchst du die Rule of Five wirklich?
     Wenn deine Klasse Rohpointer oder andere nicht-automatisch verwaltete Ressourcen besitzt. Wenn du benutzerdefiniertes 
     Kopiier-/Move-Verhalten brauchst. Wenn du einen eigenen Destruktor schreibst und Move-Semantik erhalten willst.
 
+Beispiel
+```cpp
+class Buffer {
+public:
+    explicit Buffer(std::size_t n)
+        : size_(n), data_(new int[n]) {}
+
+    // Destruktor
+    ~Buffer() {
+        delete[] data_;
+    }
+
+    // Kopierkonstruktor (tiefe Kopie)
+    Buffer(const Buffer& other)
+        : size_(other.size_), data_(new int[other.size_]) {
+        std::copy(other.data_, other.data_ + size_, data_);
+    }
+
+    // Kopierzuweisung
+    Buffer& operator=(const Buffer& other) {
+        if (this != &other) {
+            Buffer tmp(other);          // Kopie
+            std::swap(size_, tmp.size_);
+            std::swap(data_, tmp.data_);
+        }
+        return *this;
+    }
+
+    // Move-Konstruktor
+    Buffer(Buffer&& other) noexcept
+        : size_(other.size_), data_(other.data_) {
+        other.size_ = 0;
+        other.data_ = nullptr;
+    }
+
+    // Move-Zuweisung
+    Buffer& operator=(Buffer&& other) noexcept {
+        if (this != &other) {
+            delete[] data_;
+            size_ = other.size_;
+            data_ = other.data_;
+            other.size_ = 0;
+            other.data_ = nullptr;
+        }
+        return *this;
+    }
+
+private:
+    std::size_t size_;
+    int* data_;
+};
+```
+
 ## Templates
 declaration and definition only in header!
 ```cpp
