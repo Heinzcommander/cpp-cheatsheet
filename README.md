@@ -482,6 +482,34 @@ corresponding operations on each data member and each base class as shown above.
 constructor (required to create arrays) if the class has no constructors. Constructors, assignment, and
 destructors do not inherit.
 
+## Rule-of-Five
+Die Rule of Five (Fünferregel) ist eine C++-Programmierregel, die besagt: Wenn du in einer Klasse eine der fünf speziellen 
+Memberfunktionen selbst definierst (oder löschst), solltest du in der Regel alle fünf definieren – sonst riskierst du 
+Speicherlecks, doppeltes Freigeben oder ineffizientes Kopieren. Was sind die fünf Funktionen?
+
+Ab C++11 gehören diese fünf „speziellen Memberfunktionen“ zur Rule of Five:
+
+    Destruktor
+    ~Klasse(); – räumt Ressourcen auf (z. B. delete, File-Handles schließen).
+
+    Kopierkonstruktor
+    Klasse(const Klasse& other); – erzeugt eine neue Instanz als Kopie einer bestehenden.
+
+    Kopierzuweisungsoperator
+    Klasse& operator=(const Klasse& other); – weist den Inhalt eines Objekts einem anderen zu.
+
+    Move-Konstruktor
+    Klasse(Klasse&& other) noexcept; – „bewegt“ Ressourcen aus einem temporären Objekt in ein neues, 
+    ohne tief zu kopieren.
+
+    Move-Zuweisungsoperator
+    Klasse& operator=(Klasse&& other) noexcept; – bewegt Ressourcen bei einer Zuweisung.
+
+Wann brauchst du die Rule of Five wirklich?
+
+    Wenn deine Klasse Rohpointer oder andere nicht-automatisch verwaltete Ressourcen besitzt. Wenn du benutzerdefiniertes 
+    Kopiier-/Move-Verhalten brauchst. Wenn du einen eigenen Destruktor schreibst und Move-Semantik erhalten willst.
+
 ## Templates
 declaration and definition only in header!
 ```cpp
