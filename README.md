@@ -563,6 +563,13 @@ private:
 };
 ```
 
+## Rule-of-zero
+Moderne Alternative: Rule of Zero
+
+Heute wird oft empfohlen, Ressourcenverwaltung in Smart Pointer (std::unique_ptr, std::shared_ptr) oder 
+andere RAII-Typen auszulagern. Dann kann der Compiler alle fünf Funktionen korrekt automatisch generieren 
+– du definierst keine davon selbst. Das nennt man Rule of Zero.
+
 ## Templates
 declaration and definition only in header!
 ```cpp
