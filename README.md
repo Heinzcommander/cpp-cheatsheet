@@ -432,6 +432,30 @@ T d[10]; vector<T> e(d, d+10);      // e is initialized from d
 
 std::vector<std::vector<int>> mat;      // empty 2D vector
 std::vector<std::vector<int>> mat2(5);  // 5 rows, each row initially empty
+
+```
+## matrix with std::vector
+```cpp
+template<typename T>
+class CMatrix
+{
+public:
+    CMatrix(const std::size_t rows, const std::size_t cols);
+    CMatrix(const std::size_t rows, const std::size_t cols, const T val);
+
+private:
+    std::vector<std::vector<T>> matrix;
+};
+template <typename T>
+inline CMatrix<T>::CMatrix(const std::size_t rows, const std::size_t cols)
+: matrix(rows, std::vector<T>(cols))
+{
+}
+template <typename T>
+inline CMatrix<T>::CMatrix(const std::size_t rows, const std::size_t cols, const T val)
+: matrix(rows, std::vector<T>(cols, val))
+{
+}
 ```
 
 ## `deque` (Array stack queue)
