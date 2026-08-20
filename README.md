@@ -285,6 +285,9 @@ destructors do not inherit.
 ## Templates
 
 ```cpp
+template <typename T>
+using MapData = std::map<int32_t, std::vector<T>>; 
+
 template <class T> T f(T t);// Overload f for all types
 template <class T> class X {// Class with type parameter T
   X(T t); };                // A constructor
