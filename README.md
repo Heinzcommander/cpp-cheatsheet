@@ -458,6 +458,25 @@ inline CMatrix<T>::CMatrix(const std::size_t rows, const std::size_t cols, const
 : matrix(rows, std::vector<T>(cols, val))
 {
 }
+
+// using of matrix object
+int main(int argc, char** argv)
+{
+    std::vector<std::vector<int>> matrix(0, std::vector<int>(6));
+    if (matrix.empty())
+    {
+        std::cout << "Empty" << std::endl;
+    }
+    else
+    {
+        auto rows = matrix.size();
+        auto cols = matrix[0].size();
+    
+        std::cout << "rows = " << rows << " cols = " << cols << std::endl;
+    }
+
+    return 0;
+}
 ```
 
 ## `deque` (Array stack queue)
