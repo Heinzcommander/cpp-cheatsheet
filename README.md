@@ -298,6 +298,20 @@ template <class T, class U=T, int n=0>
                             // Template with default parameters
 ```
 
+## Type Traits until C++17 - since C++20 is recommend C++-Concepts
+Limit Template Function to certain properties
+```cpp
+#include <type_traits>
+template <typename T>
+T max(T a, T b)
+{
+    // static_assert(std::is_integral<T>::value, "failed...");     // only integer allowed
+
+    static_assert(std::disjunction<std::is_integral<T>, std::is_floating_point<T>>::value, "failed...");
+    return (a > b) ? a : b;
+}
+```
+
 ## Namespaces
 ```cpp
 namespace { ... }           // anonymous namespace with local scope - instead static keyword before variables
