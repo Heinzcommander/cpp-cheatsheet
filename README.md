@@ -446,11 +446,13 @@ public:
 private:
     std::vector<std::vector<T>> matrix;
 };
+
 template <typename T>
 inline CMatrix<T>::CMatrix(const std::size_t rows, const std::size_t cols)
-: matrix(rows, std::vector<T>(cols))
+: matrix(rows, std::vector<T>(cols. T{}))
 {
 }
+
 template <typename T>
 inline CMatrix<T>::CMatrix(const std::size_t rows, const std::size_t cols, const T val)
 : matrix(rows, std::vector<T>(cols, val))
