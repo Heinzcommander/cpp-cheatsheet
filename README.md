@@ -462,7 +462,7 @@ inline CMatrix<T>::CMatrix(const std::size_t rows, const std::size_t cols, const
 // using of matrix object
 int main(int argc, char** argv)
 {
-    std::vector<std::vector<int>> matrix(0, std::vector<int>(6));
+    std::vector<std::vector<int>> matrix(2, std::vector<int>(6));       // 2 rows and 6 columns
     if (matrix.empty())
     {
         std::cout << "Empty" << std::endl;
