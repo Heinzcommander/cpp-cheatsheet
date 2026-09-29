@@ -1108,7 +1108,7 @@ a.push_front(x);          // Puts x at a[0], shifts elements toward back
 a.pop_front();            // Removes a[0], shifts toward front
 ```
 
-## `std::pair'
+## `std::pair`
 ```cpp
 #include <utility>        // Include utility (std namespace)
 std::pair<string, int> a{"hello", 3};  // A 2-element struct
@@ -1199,6 +1199,7 @@ if (s.find(123) != s.end()) // Search for an element
     s.erase(123);
 cout << s.size();         // Number of elements in set
 ```
+
 ## `random` 
 ```cpp
 #include <random>
@@ -1276,6 +1277,51 @@ using ms =                       // Define ms as floating point duration
                                  // Compute duration in milliseconds
 cout << duration_cast<ms>(to - from)
   .count() << "ms";
+```
+
+## `C++-20 concepts` 
+Concepts are a revolutionary approach for writing templates! They allow you to put constraints 
+on template parameters that improve the readability of code, speed up compilation time, and give 
+better error messages.
+```cpp
+#include <concepts>
+#include <iostream>
+#include <string>
+
+template <typename T>
+concept LessComp = requires(T x, T y) { x < y; };
+
+template <typename T>
+concept Numeric = std::integral<T> || std::floating_point<T>;
+
+template <typename T>
+concept NumComp = Numeric<T> && LessComp<T>;
+
+template <typename T, typename U>
+    requires NumComp<T> && NumComp<U>
+auto max1(const T &a, const U &b)
+{
+    return a < b ? b : a;
+}
+
+template <NumComp T, NumComp U>
+auto max2(const T &a, const U &b)
+{
+    return a < b ? b : a;
+}
+
+int main()
+{
+    std::cout << max1(10, 11) << '\n';
+    std::cout << max1(10.0F, 11.0F) << '\n';
+    std::cout << max1(10.0, 11.0) << '\n';
+
+    std::cout << max2(10, 11) << '\n';
+    std::cout << max2(10.0F, 11.0F) << '\n';
+    std::cout << max2(10.0, 11.0) << '\n';
+
+    return 0;
+}
 ```
 
 ## `thread` (Multi-threading library)
