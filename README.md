@@ -129,6 +129,31 @@ static int x;               // Global lifetime even if local scope
 extern int x;               // Information only, declared elsewhere
 ```
 
+## const, constexpr, static constexpr
+```cpp
+#include <iostream>
+void process() {
+    // 1. const: (Zur Laufzeit/Schreibschutz)
+    // Der Wert wird zur Laufzeit berechnet und auf dem Stack abgelegt bei jedem Funktionsaufruf.
+    const int a = 42; 
+
+    // 2. constexpr: (Zur Compilezeit/Automatischer Speicher)
+    // Obwohl der Wert zur Kompilierzeit berechnet wird, hat eine lokale constexpr-Variable
+    // standardmäßig automatische Lebensdauer (Stack-Speicher). Bei jedem Funktionsaufruf
+    // wird der Wert (oder ein kleiner Puffer) theoretisch auf dem Stack instanziiert oder kopiert
+    // --> kann den stack belasten
+    constexpr int b = 10 * 5; 
+
+    // 3. static constexpr: (Zur Compilezeit + Statischer Speicher)
+    // Zur Compilezeit berechnet + feste Speicheradresse (statische Lebensdauer)
+    static constexpr int c = 100; 
+
+    std::cout << a << ", " << b << ", " << c << '\n';
+}
+
+
+```
+
 ## Statements
 ```cpp
 x=y;                        // Every expression is a statement
