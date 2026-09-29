@@ -1457,6 +1457,46 @@ int main()
 }
 ```
 
+## `Exceptions` 
+```cpp
+// 1. throw exception to caller
+#include <iostream>
+#include <stdexcept> // Für std::runtime_error
+
+// Eine Funktion, die einen Fehler auslösen kann
+double teilen(double zaehler, double nenner) {
+    if (nenner == 0) {
+        // Fehler signalisieren mit throw
+        throw std::runtime_error("Fehler: Division durch Null ist nicht erlaubt!");
+    }
+    return zaehler / nenner;
+}
+
+// 2. caller that have to catch the exception otherwise program crash
+// try-catch-block is to use for exception handling
+int main()
+{
+    double a = 10.0;
+    double b = 0.0;
+
+    try {
+        // Code, der einen Fehler verursachen kann
+        std::cout << "Versuche zu teilen...\n";
+        double ergebnis = teilen(a, b);
+        std::cout << "Ergebnis: " << ergebnis << "\n";
+    } 
+    catch (const std::exception& e) {
+        // Fehler abfangen und behandeln
+        std::cerr << e.what() << "\n";
+    }
+
+    std::cout << "Programm läuft weiter nach dem try-catch-Block.\n";
+    return 0;
+}
+
+
+```
+
 ## `thread` (Multi-threading library)
 ```cpp
 #include <thread>         // Include thread
