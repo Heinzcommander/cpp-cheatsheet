@@ -571,8 +571,35 @@ andere RAII-Typen auszulagern. Dann kann der Compiler alle fünf Funktionen korr
 – du definierst keine davon selbst. Das nennt man Rule of Zero.
 
 ## Templates
-declaration and definition only in header!
+- declaration and definition only in header!
+- template parameters have to known at compile time
 ```cpp
+// Exercise 1:
+template <std::size_t N>                                // Non Template Type Params
+void print_array(const std::array<std::int32_t, N> arr)
+{
+    for (std::size_t i = 0; i < arr.size(); i++)
+    {
+        std::cout << arr[i] << '\n';
+    }
+}
+
+int main()
+{
+    constexpr std::size_t arr_len1 = 4U;
+    const std::array<std::int32_t, arr_len1> arr1 = {1, 2, 3, 4};
+    print_array(arr1);
+
+    constexpr std::size_t arr_len2 = 6U;
+    const std::array<std::int32_t, arr_len2> arr2 = {1, 2, 3, 4, -1, -2};
+    print_array(arr2);
+
+    const std::array<std::int32_t, 20> arr3 = {};
+    print_array<20>(arr3);
+
+    return 0;
+}
+// Exercise 2:
 template <typename T>
 void print_vector(std::vector<T> &vec)
 {
