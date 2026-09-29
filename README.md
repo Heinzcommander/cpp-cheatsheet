@@ -1467,7 +1467,8 @@ int main()
 double teilen(double zaehler, double nenner) {
     if (nenner == 0) {
         // Fehler signalisieren mit throw
-        throw std::runtime_error("Fehler: Division durch Null ist nicht erlaubt!");
+        // throw std::runtime_error("Fehler: Division durch Null ist nicht erlaubt!");
+        throw std::invalid_argument("Fehler: Division durch Null ist nicht erlaubt!");
     }
     return zaehler / nenner;
 }
