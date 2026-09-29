@@ -572,7 +572,7 @@ andere RAII-Typen auszulagern. Dann kann der Compiler alle fünf Funktionen korr
 
 ## Templates
 - declaration and definition only in header!
-- template parameters have to known at compile time
+- template parameters have to known at compile time (constexpr...)
 ```cpp
 // Exercise 1:
 template <std::size_t N>                                // Non Template Type Params
@@ -599,6 +599,7 @@ int main()
 
     return 0;
 }
+
 // Exercise 2:
 template <typename T>
 void print_vector(std::vector<T> &vec)
@@ -629,6 +630,35 @@ template <class T> X<T>::X(T t) {}
 X<int> x(3);                // An object of type "X of int"
 template <class T, class U=T, int n=0>
                             // Template with default parameters
+
+// Exercise 3: Template Specialized
+#include <iostream>
+
+// 3.1 Primäres (generisches) Template
+template <typename T>
+class Info {
+public:
+    void print() {
+        std::cout << "Generisches Template für unbekannten Typ\n";
+    }
+};
+
+// 3.2 Vollständige Spezialisierung für den Typ 'int'
+template <>
+class Info<int> {
+public:
+    void print() {
+        std::cout << "Spezialisierte Version für int!\n";
+    }
+};
+
+int main() {
+    Info<double> a; // Nutzt das primäre Template
+    Info<int> b;    // Nutzt die spezialisierte Version
+
+    a.print();      // Ausgabe: Generisches Template für unbekannten Typ
+    b.print();      // Ausgabe: Spezialisierte Version für int!
+}
 ```
 
 ## Structured bindings (C++17) 
@@ -730,7 +760,7 @@ auto lambda = [&, a]() {                 // b,c by reference, a by value
 };
 ```
 
-## Ranges (C++20)
+## `C++20 ranges`
 ```cpp
 std::vector<int> input = {0, 1, 2, 3, 4, 5};
 std::vector<int> output;
