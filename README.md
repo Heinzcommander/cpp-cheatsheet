@@ -777,13 +777,6 @@ ceil(x); floor(x);          // Round up or down (as a double)
 fabs(x); fmod(x, y);        // Absolute value, x mod y
 ```
 
-## `assert.h`, `cassert` (Debugging Aid)
-```cpp
-#include <cassert>        // Include iostream (std namespace)
-assert(e);                // If e is false, print message and abort
-#define NDEBUG            // (before #include <assert.h>), turn off assert
-```
-
 ## `iostream.h`, `iostream` (Replaces `stdio.h`)
 ```cpp
 #include <iostream>         // Include iostream (std namespace)
@@ -1080,7 +1073,7 @@ print_vec(my_vec);      // output: 1,2,3,4,5
 ```
 
 ## Range based for loop
-- works in background with iteratoren
+works in background with iteratoren
 ```cpp
 // with structured binding C++17
 struct Data{ float x; float y; };
@@ -1277,6 +1270,64 @@ using ms =                       // Define ms as floating point duration
                                  // Compute duration in milliseconds
 cout << duration_cast<ms>(to - from)
   .count() << "ms";
+```
+
+## `assert.h`, `cassert` (Debugging Aid)
+```cpp
+#include <cassert>        // Include iostream (std namespace)
+assert(e);                // If e is false, print message and abort
+#define NDEBUG            // (before #include <assert.h>), turn off assert
+```
+
+
+## `type_traits`
+allow to retrieve datatype information at compile time
+static_assert is an expression, that allows to check conditions at compile time
+```cpp
+// Exercise 1:
+#include <iostream>
+#include <type_traits>
+
+template <typename T>
+void process(T val) {
+    // Compile-Zeit-Prüfung mit if constexpr
+    if constexpr (std::is_integral_v<T>) {
+        std::cout << "Ganze Zahl: " << val << '\n';
+    } else {
+        std::cout << "Keine ganze Zahl.\n";
+    }
+}
+
+int main() {
+    process(42);       // Gibt "Ganze Zahl: 42" aus
+    process(3.14);     // Gibt "Keine ganze Zahl." aus
+}
+
+// Exercise 2:
+void algorithm_signed  (int i)      { /*...*/ } 
+void algorithm_unsigned(unsigned u) { /*...*/ } 
+
+template <typename T>
+void algorithm(T t)
+{
+    if constexpr(std::is_signed<T>::value)        // an if statement that works at compile time;
+        algorithm_signed(t);
+    else if constexpr (std::is_unsigned<T>::value)
+        algorithm_unsigned(t);
+    else
+        static_assert(std::is_signed<T>::value    // function that, as the name implies, triggers an assert at compile time if the condition is not met;
+                    || std::is_unsigned<T>::value,
+                    "Must be signed or unsigned!");
+}
+
+int main()
+{
+  algorithm(3);       // T is int, include algorithm_signed()
+  unsigned x = 3;
+  algorithm(x);       // T is unsigned int, include algorithm_unsigned()
+  algorithm("hello"); // T is string, build error!
+}
+
 ```
 
 ## `C++-20 concepts` 
