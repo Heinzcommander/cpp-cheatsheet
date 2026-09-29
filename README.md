@@ -1281,8 +1281,8 @@ assert(e);                // If e is false, print message and abort
 
 
 ## `type_traits`
-allow to retrieve datatype information at compile time
-static_assert is an expression, that allows to check conditions at compile time
+- allow to retrieve datatype information at compile time
+- static_assert is an expression, that allows to check conditions at compile time
 ```cpp
 // Exercise 1:
 #include <iostream>
