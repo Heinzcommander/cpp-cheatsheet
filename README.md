@@ -808,9 +808,15 @@ give to the pipe |.
 */
 ```
 
-## `memory` (dynamic memory management)
+## `Smart Pointer` (dynamic memory management)
+- Resource acquisition is initalization (RAII)
+- constructor allocate memory
+- destructor de-allocate memory
+- wrapper class for encapusling new and delete operator
+- class is go ou scope and resources are relased automatically
 ```cpp
 #include <memory>           // Include memory (std namespace)
+
 shared_ptr<int> x;          // Empty shared_ptr to a integer on heap. Uses reference counting for cleaning up objects.
 x = make_shared<int>(12);   // Allocate value 12 on heap
 shared_ptr<int> y = x;      // Copy shared_ptr, implicit changes reference count to 2.
@@ -833,6 +839,13 @@ w = y;                      // w has weak reference to y.
 if (shared_ptr<int> s = w.lock()) { // Has to be copied into a shared_ptr before usage
     cout << *s;
 }
+
+// std::unique_ptr          // exclusive owner
+// - at every time can only one hold the ownership to this pointer
+// - copy isn't possible but std::move(...) can move the ownership
+
+std::unique_ptr<T> ptr = std::make_unique<T>(args);
+
 unique_ptr<int> z;          // Create empty unique pointers
 unique_ptr<int> q;
 z = make_unique<int>(16);   // Allocate int (16) on heap. Only one reference allowed.
