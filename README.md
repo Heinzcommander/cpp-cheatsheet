@@ -863,6 +863,36 @@ cout << *q;
 shared_ptr<B> r;
 r = dynamic_pointer_cast<B>(t); // Converts t to a shared_ptr<B>
 
+// circular dependencies!! ATTENTION:
+#include <iostream>
+#include <memory>
+
+struct B; // Vorwärtsdeklaration
+struct A {
+    std::shared_ptr<B> b_ptr;
+    ~A() { std::cout << "A gelöscht\n"; }
+};
+struct B {
+    std::shared_ptr<A> a_ptr;
+    ~B() { std::cout << "B gelöscht\n"; }
+};
+
+int main()
+{
+    {   auto objA = std::make_shared<A>();
+        auto objB = std::make_shared<B>();
+
+        // Zirkuläre Verknüpfung erstellen
+        objA->b_ptr = objB;
+        objB->a_ptr = objA; 
+    } // Am Ende des Blocks sollten objA und objB gelöscht werden.
+    
+    std::cout << "Programmende\n";
+    return 0;
+}
+// => destructor of A and B will not call -> memory leak
+// => using weak_ptr to avoid it
+
 ```
 
 ## `math.h`, `cmath` (floating point math)
