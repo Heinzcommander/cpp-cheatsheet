@@ -817,6 +817,12 @@ give to the pipe |.
 ```cpp
 #include <memory>           // Include memory (std namespace)
 
+// std::shared_ptr for shared ownership
+// - some pointer can point to the same object
+// - works internally with reference counter
+
+std::shared_ptr<T> ptr = std::make_shared<T>(args)
+
 shared_ptr<int> x;          // Empty shared_ptr to a integer on heap. Uses reference counting for cleaning up objects.
 x = make_shared<int>(12);   // Allocate value 12 on heap
 shared_ptr<int> y = x;      // Copy shared_ptr, implicit changes reference count to 2.
