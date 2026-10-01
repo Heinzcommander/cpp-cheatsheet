@@ -816,6 +816,22 @@ give to the pipe |.
 - class is go ou scope and resources are relased automatically
 ```cpp
 #include <memory>           // Include memory (std namespace)
+// std::unique_ptr          // exclusive owner
+// - at every time can only one hold the ownership to this pointer
+// - copy isn't possible but std::move(...) can move the ownership
+
+std::unique_ptr<T> ptr = std::make_unique<T>(args);
+
+unique_ptr<int> z;          // Create empty unique pointers
+unique_ptr<int> q;
+z = make_unique<int>(16);   // Allocate int (16) on heap. Only one reference allowed.
+q = move(z);                // Move reference from z to q.
+if (z == nullptr){
+    cout << "Z null";
+}
+cout << *q;
+shared_ptr<B> r;
+r = dynamic_pointer_cast<B>(t); // Converts t to a shared_ptr<B>
 
 // std::shared_ptr for shared ownership
 // - some pointer can point to the same object
@@ -846,34 +862,17 @@ if (shared_ptr<int> s = w.lock()) { // Has to be copied into a shared_ptr before
     cout << *s;
 }
 
-// std::unique_ptr          // exclusive owner
-// - at every time can only one hold the ownership to this pointer
-// - copy isn't possible but std::move(...) can move the ownership
-
-std::unique_ptr<T> ptr = std::make_unique<T>(args);
-
-unique_ptr<int> z;          // Create empty unique pointers
-unique_ptr<int> q;
-z = make_unique<int>(16);   // Allocate int (16) on heap. Only one reference allowed.
-q = move(z);                // Move reference from z to q.
-if (z == nullptr){
-    cout << "Z null";
-}
-cout << *q;
-shared_ptr<B> r;
-r = dynamic_pointer_cast<B>(t); // Converts t to a shared_ptr<B>
-
-// circular dependencies!! ATTENTION:
+// ATTENTION: circular dependencies!! 
 #include <iostream>
 #include <memory>
 
 struct B; // Vorwärtsdeklaration
 struct A {
     std::shared_ptr<B> b_ptr;
-    ~A() { std::cout << "A gelöscht\n"; }
+    ~A() { std::cout << "A gelöscht\n"; }  // has got shared_ptr to another object
 };
 struct B {
-    std::shared_ptr<A> a_ptr;
+    std::shared_ptr<A> a_ptr;              // has got shared_ptr to another object
     ~B() { std::cout << "B gelöscht\n"; }
 };
 
@@ -891,8 +890,52 @@ int main()
     return 0;
 }
 // => destructor of A and B will not call -> memory leak
+// => each object hold share_ptr to the other object therefore will not decrement the reference counter
 // => using weak_ptr to avoid it
 
+// std::weak_ptr - the observer
+// - special pointer that have no ownership to an object
+// - together with shared_ptr
+// - don't increment the reference counter
+// - avoid circular dependecies
+struct B; // Vorwärtsdeklaration
+struct A {
+    std::weak_ptr<B> b_ptr;
+    ~A() { std::cout << "A gelöscht\n"; }  // has got shared_ptr to another object
+};
+struct B {
+    std::weak_ptr<A> a_ptr;              // has got shared_ptr to another object
+    ~B() { std::cout << "B gelöscht\n"; }
+};
+// => no circular dependecies, because no increment of reference count
+
+// using of weak_ptr
+// Einen shared_ptr erzeugen
+int main() {
+    std::shared_ptr<int> sharedData = std::make_shared<int>(42);
+    
+    // Einen weak_ptr aus dem shared_ptr erstellen
+    std::weak_ptr<int> weakData = sharedData;
+    
+    std::cout << "Referenzanzahl (shared): " << sharedData.use_count() << "\n"; // Ausgabe: 1
+
+    // Zugriff über .lock() versuchen
+    if (auto tempShared = weakData.lock()) {
+        std::cout << "Objekt existiert noch. Wert: " << *tempShared << "\n";
+    } else {
+        std::cout << "Objekt wurde bereits gelöscht.\n";
+    }
+
+    // Den originalen shared_ptr zurücksetzen (Objekt wird freigegeben)
+    sharedData.reset();
+
+    // Erneuter Zugriffsversuch nach dem Löschen
+    if (auto tempShared = weakData.lock()) {
+        std::cout << "Objekt existiert noch. Wert: " << *tempShared << "\n";
+    } else {
+        std::cout << "Objekt existiert nicht mehr (expired).\n";
+    }
+}
 ```
 
 ## `math.h`, `cmath` (floating point math)
