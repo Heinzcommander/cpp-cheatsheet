@@ -1642,7 +1642,7 @@ int main() {
     int alter = 42;
     
     // Einfache Ersetzung
-    std::string s = std::format("Hallo, {}! Du bist {} Jahre alt.", name, alter);
+    std::string s = std::format("Hallo, {0}! Du bist {1} Jahre alt.", name, alter);
     std::println("{}", s); // (C++23 print) oder std::cout << s;
 }
 ```
