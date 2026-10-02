@@ -1647,6 +1647,56 @@ int main() {
 }
 ```
 
+## `std::exceptions`
+- central base class for all standard exceptions
+- for detecting runtime error and to handle that
+- try: cover the code where the failure can happen
+- throw: trigger an exception, when error is happen
+- catch: catch the throwing exception and allow processing
+```cpp
+#include <exception>
+#include <iostream>
+// 1. Sample
+double div(const double x, const double y) {
+    if (y == 0.0)
+    {
+        throw std::invalid_argument("Divisor is zero!");
+    }
+    return x / y;
+}
+
+int main() {
+    const auto x = 10.0;
+    const auto y = 0.0;
+    std::cout << "We will compute (x/y)" << '\n';
+    try
+    {
+        const auto z = div(x, y);
+        std::cout << "x/y = " << z << '\n';
+    }
+    catch (const std::exception &e)
+    {
+        std::cerr
+    }
+    return 0;
+}
+
+// 2. Sample
+int main() {
+    try {
+        int alter = -5;
+        if (alter < 0) {
+            throw std::invalid_argument("Alter darf nicht negativ sein!");
+        }
+    } 
+    catch (const std::exception& e) {
+        // Fängt std::exception und alle abgeleiteten Klassen
+        std::cerr << "Fehler gefangen: " << e.what() << '\n';
+    }
+    return 0;
+}
+```
+
 ## `thread` (Multi-threading library)
 ```cpp
 #include <thread>         // Include thread
