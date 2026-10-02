@@ -1586,7 +1586,37 @@ int main()
     std::cout << "Programm läuft weiter nach dem try-catch-Block.\n";
     return 0;
 }
+```
 
+## `std::optional` 
+- is a wrapper, that contain an certain typ T or is empty (std::nullopt)
+- to use when any function can't return a meaningful typ
+- it is showing the missing of a value cleanly
+```cpp
+#include <iostream>
+#include <optional>
+
+// Eine Funktion, die optional ein int zurückgibt
+std::optional<int> teile(int a, int b) {
+    if (b == 0) {
+        return std::nullopt; // Kein Wert vorhanden (Fehlerfall)
+    }
+    return a / b; // Wert erfolgreich zurückgeben
+}
+
+int main() {
+    auto ergebnis = teile(10, 2);
+
+    // Prüfen, ob ein Wert vorhanden ist
+    if (ergebnis.has_value()) {
+        std::cout << "Ergebnis: " << *ergebnis << '\n'; // Wert auslesen mit Sternchen
+    } else {
+        std::cout << "Division nicht moeglich!\n";
+    }
+
+    // Alternativ mit einem Standardwert falls leer
+    ints_sicher: std::cout << ergebnis.value_or(0) << '\n'; 
+}
 
 ```
 
@@ -1627,12 +1657,6 @@ thread t2(pingPongFn, "pong");
 thread t3(pingPongFn, "boing");
 ```
 
-## `NLohman json` (GitHub Library for json)
-```cpp
-https://github.com/nlohmann/json/blob/develop/README.md
-
-```
-
 ## `future` (thread support library)
 ```cpp
 #include <future>         // Include future
@@ -1648,4 +1672,10 @@ future<int> fut =         // result of async function
   async(launch::async, fib, 4); // start async function in other thread
 // do some other work 
 cout << fut.get();        // get result of async function. Wait if needed.
+```
+
+## `NLohman json` (GitHub Library for json)
+```cpp
+https://github.com/nlohmann/json/blob/develop/README.md
+
 ```
