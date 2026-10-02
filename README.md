@@ -1453,7 +1453,6 @@ assert(e);                // If e is false, print message and abort
 #define NDEBUG            // (before #include <assert.h>), turn off assert
 ```
 
-
 ## `type_traits`
 - allow to retrieve datatype information at compile time
 - static_assert is an expression, that allows to check conditions at compile time
@@ -1549,6 +1548,90 @@ int main()
 }
 ```
 
+## `std::optional` 
+- is a wrapper, that contain an certain typ T or is empty (std::nullopt)
+- to use when any function can't return a meaningful typ
+- it is showing the missing of a value cleanly
+```cpp
+#include <iostream>
+#include <optional>
+
+// Eine Funktion, die optional ein int zurückgibt
+std::optional<int> teile(int a, int b) {
+    if (b == 0) {
+        return std::nullopt; // Kein Wert vorhanden (Fehlerfall)
+    }
+    return a / b; // Wert erfolgreich zurückgeben
+}
+
+int main() {
+    auto ergebnis = teile(10, 2);
+
+    // Prüfen, ob ein Wert vorhanden ist
+    if (ergebnis.has_value()) {
+        std::cout << "Ergebnis: " << *ergebnis << '\n'; // Wert auslesen mit Sternchen
+    } else {
+        std::cout << "Division nicht moeglich!\n";
+    }
+
+    // Alternativ mit einem Standardwert falls leer
+    ints_sicher: std::cout << ergebnis.value_or(0) << '\n'; 
+}
+```
+
+## `std::variant` (C++17)
+- container which is type safe, for storing any copyable data type
+```cpp
+// 1. Sample
+template <typename T>
+bool is_type(const std::any &a)
+{
+    return a.type() == typeid(T);
+}
+// void*
+
+int main()
+{
+    auto a = std::any{42}; // integer 42
+    a = 42.0;              // double 42.0
+    a = std::string{"42"}; // std::string "42"
+
+    std::cout << "int: " << std::boolalpha << is_type<int>(a) << '\n';
+    std::cout << "dbl: " << std::boolalpha << is_type<double>(a) << '\n';
+    std::cout << "str: " << std::boolalpha << is_type<std::string>(a) << '\n';
+
+    std::cout << "has_value: " << std::boolalpha << a.has_value() << '\n';
+
+    auto d = std::any_cast<std::string>(a);
+    std::cout << d << '\n';
+
+    return 0;
+}
+
+// 2. Sample
+#include <iostream>
+#include <any>
+#include <string>
+
+int main() {
+    std::any a = 5; // Speichert einen int
+    a = std::string("Hallo C++17"); // Speichert einen std::string
+
+    // Prüfen, ob ein Wert vorhanden ist
+    if (a.has_value()) {
+        std::cout << "Enthält einen Wert!\n";
+    }
+
+    // Wert auslesen mit std::any_cast
+    try {
+        std::string s = std::any_cast<std::string>(a);
+        std::cout << s << '\n';
+    } catch (const std::bad_any_cast& e) {
+        std::cout << "Fehler beim Casten: " << e.what() << '\n';
+    }
+}
+```
+
 ## `Exceptions` 
 ```cpp
 // 1. throw exception to caller
@@ -1586,38 +1669,6 @@ int main()
     std::cout << "Programm läuft weiter nach dem try-catch-Block.\n";
     return 0;
 }
-```
-
-## `std::optional` 
-- is a wrapper, that contain an certain typ T or is empty (std::nullopt)
-- to use when any function can't return a meaningful typ
-- it is showing the missing of a value cleanly
-```cpp
-#include <iostream>
-#include <optional>
-
-// Eine Funktion, die optional ein int zurückgibt
-std::optional<int> teile(int a, int b) {
-    if (b == 0) {
-        return std::nullopt; // Kein Wert vorhanden (Fehlerfall)
-    }
-    return a / b; // Wert erfolgreich zurückgeben
-}
-
-int main() {
-    auto ergebnis = teile(10, 2);
-
-    // Prüfen, ob ein Wert vorhanden ist
-    if (ergebnis.has_value()) {
-        std::cout << "Ergebnis: " << *ergebnis << '\n'; // Wert auslesen mit Sternchen
-    } else {
-        std::cout << "Division nicht moeglich!\n";
-    }
-
-    // Alternativ mit einem Standardwert falls leer
-    ints_sicher: std::cout << ergebnis.value_or(0) << '\n'; 
-}
-
 ```
 
 ## `thread` (Multi-threading library)
