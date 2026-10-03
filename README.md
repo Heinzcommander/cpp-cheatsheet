@@ -1267,7 +1267,7 @@ for (const auto &row : my_vector) {
 }
 ```
 
-## `deque` (Array stack queue)
+## `std::deque` (Array stack queue)
 `deque<T>` is like `vector<T>`, but also supports:
 ```cpp
 #include <deque>          // Include deque (std namespace)
@@ -1319,7 +1319,7 @@ for(const auto &row : my_map1) {
 }
 ```
 
-## `unordered_map` 
+## `std::unordered_map` 
 - associative array - usually implemented as hash table - avg. time complexity: O(1))
 ```cpp
 #include <unordered_map>  // Include map (std namespace)
@@ -1356,7 +1356,7 @@ if (s.find(4) == s.end()) {
 }
 ```
 
-## `unordered_set` 
+## `std::unordered_set` 
 - store unique elements - usually implemented as a hash set - avg. time complexity: O(1)
 ```cpp
 #include <unordered_set>  // Include set (std namespace)
@@ -1367,7 +1367,7 @@ if (s.find(123) != s.end()) // Search for an element
 cout << s.size();         // Number of elements in set
 ```
 
-## `random` 
+## `std::random` 
 ```cpp
 #include <random>
 
@@ -1382,7 +1382,7 @@ for (auto &row : my_vec) {
 }
 ```
 
-## `algorithm` (A collection of 60 algorithms on sequences with iterators)
+## `algorithm.h` (A collection of 60 algorithms on sequences with iterators)
 ```cpp
 #include <algorithm>      // Include algorithm (std namespace)
 min(x, y); max(x, y);     // Smaller/larger of x, y (any type defining <)
@@ -1392,7 +1392,7 @@ sort(a.begin(), a.end()); // Sort vector or deque
 reverse(a.begin(), a.end()); // Reverse vector or deque
 ```
 
-## `limits` 
+## `limits.h` 
 ```cpp
 #include <limits>      // Include 
 
@@ -1421,7 +1421,7 @@ bool almost_equal(const T x, const T y)
 }
 ```
 
-## `chrono` (Time related library)
+## `std::chrono` (Time related library)
 ```cpp
 #include <chrono>                // Include chrono
 //steady_clock is suitable for interfall measurment
@@ -1453,7 +1453,7 @@ assert(e);                // If e is false, print message and abort
 #define NDEBUG            // (before #include <assert.h>), turn off assert
 ```
 
-## `type_traits`
+## `type_traits.h`
 - allow to retrieve datatype information at compile time
 - static_assert is an expression, that allows to check conditions at compile time
 ```cpp
@@ -1502,7 +1502,7 @@ int main()
 }
 ```
 
-## `C++-20 concepts` 
+## `std::concepts` (C++20) 
 Concepts are a revolutionary approach for writing templates! They allow you to put constraints 
 on template parameters that improve the readability of code, speed up compilation time, and give 
 better error messages.
@@ -1647,7 +1647,8 @@ int main() {
 }
 ```
 
-## `std::exceptions`
+## `std::exception`
+- catch false error inputs for library functions
 - central base class for all standard exceptions
 - for detecting runtime error and to handle that
 - try: cover the code where the failure can happen
