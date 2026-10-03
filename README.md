@@ -1502,7 +1502,7 @@ int main()
 }
 ```
 
-## `std::concepts` (C++20) 
+## `concept` (C++20) 
 Concepts are a revolutionary approach for writing templates! They allow you to put constraints 
 on template parameters that improve the readability of code, speed up compilation time, and give 
 better error messages.
