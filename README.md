@@ -1517,7 +1517,7 @@ template <typename T>
 concept Numeric = std::integral<T> || std::floating_point<T>;
 
 // Verwendung in einer Funktion
-template <Numeric T>
+template <Numeric T>    // if no integr or float -> compiler error
 T add(T a, T b) {
     return a + b;
 }
