@@ -1511,6 +1511,18 @@ better error messages.
 #include <iostream>
 #include <string>
 
+// 1. Sample
+// Ein eigenes Concept, das Ganzzahlen oder Gleitkommazahlen erlaubt
+template <typename T>
+concept Numeric = std::integral<T> || std::floating_point<T>;
+
+// Verwendung in einer Funktion
+template <Numeric T>
+T add(T a, T b) {
+    return a + b;
+}
+
+// 2. Sample
 template <typename T>
 concept LessComp = requires(T x, T y) { x < y; };
 
